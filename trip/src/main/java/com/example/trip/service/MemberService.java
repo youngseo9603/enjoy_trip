@@ -3,6 +3,7 @@ package com.example.trip.service;
 import com.example.trip.domain.Member;
 import com.example.trip.dto.Member.LoginRequest;
 import com.example.trip.dto.Member.SignInRequest;
+import com.example.trip.dto.Member.UpdatePasswordRequest;
 import com.example.trip.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,11 @@ import javax.transaction.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
+    @Transactional
+    public void saveMember(Member member){
+        memberRepository.save(member);
+    }
 
 
     public void saveMember(SignInRequest request) {
@@ -61,6 +67,12 @@ public class MemberService {
     public String findMemberPass(String loginId){
         Member member = memberRepository.findByLoginId(loginId);
         return member.getPassword();
+    }
+
+    @Transactional
+    public void updateMemberPass(Member member, UpdatePasswordRequest request){
+        member.setPassword(request.getPassword());
+        saveMember(member);
     }
 
 }

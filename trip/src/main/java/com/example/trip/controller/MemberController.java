@@ -3,11 +3,9 @@ package com.example.trip.controller;
 import com.example.trip.controller.constant.Message;
 import com.example.trip.controller.constant.StatusCode;
 import com.example.trip.domain.Member;
-import com.example.trip.dto.Member.LoginRequest;
-import com.example.trip.dto.Member.MyPageResponse;
-import com.example.trip.dto.Member.SignInRequest;
-import com.example.trip.dto.Member.UserIndexResponse;
+import com.example.trip.dto.Member.*;
 import com.example.trip.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +18,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class MemberController {
 
-    @Autowired
-    private MemberService memberService;
+    private final MemberService memberService;
 
     //test
     @GetMapping("/test")
@@ -51,15 +49,13 @@ public class MemberController {
 
     //login
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginRequest loginRequest, HttpServletRequest request, RedirectAttributes rttr){
-
-        HttpSession session = request.getSession();
+    public ResponseEntity login(HttpSession session, @RequestBody LoginRequest loginRequest){
 
         if(memberService.loginMember(loginRequest)) {
             Long memberIndex = memberService.findUserIndexByLoginId(loginRequest.getLoginId());
             UserIndexResponse response = new UserIndexResponse(memberIndex);
 
-            session.setAttribute("userIndex", memberIndex);
+            session.setAttribute("memberIndex", memberIndex);
 
             Message message = new Message(StatusCode.OK, "로그인 성공", response);
             return ResponseEntity.ok(message);
@@ -97,18 +93,19 @@ public class MemberController {
 
     //로그아웃
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request){
-        HttpSession session = request.getSession();
+    public ResponseEntity<?> logout(HttpSession session){
         session.invalidate();
-
         Message message = new Message(StatusCode.OK, "로그아웃");
         return ResponseEntity.ok(message);
     }
 
     //비밀번호 분실
-    @PostMapping("/password")
-    public ResponseEntity<?> findPass(@RequestHeader String loginId){
-        return ResponseEntity.ok(memberService.findMemberPass(loginId));
+    @PutMapping("/password")
+    public ResponseEntity<?> modifyPass(@RequestBody UpdatePasswordRequest request){
+        Member member = memberService.findByID(request.getMemberIndex());
+        memberService.updateMemberPass(member, request);
+        Message message = new Message(StatusCode.OK, "비밀번호 변경 성공");
+        return ResponseEntity.ok(message);
     }
 
 }

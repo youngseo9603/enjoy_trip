@@ -1,13 +1,11 @@
 package com.example.trip.dto.Member;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-import javax.persistence.Column;
-
-@Getter
+@Data
 @AllArgsConstructor
-public class LoginRequest {
-    private String loginId;
+public class UpdatePasswordRequest {
+    private Long memberIndex;
     private String password;
 }
