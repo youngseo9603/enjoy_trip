@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,17 +28,14 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public Optional<Member> findByID(Long id){
-        return memberRepository.findById(id);
+    public Member findByID(Long id){
+        return memberRepository.findByMemberIndex(id);
     }
 
     public Long findUserIndexByLoginId(String loginId){
         return memberRepository.findByLoginId(loginId).getMemberIndex();
     }
 
-    public Member findByLoginID(String id){
-        return memberRepository.findByLoginId(id);
-    }
 
     public boolean loginMember(LoginRequest request){
         Member member = memberRepository.findByLoginId(request.getLoginId());
