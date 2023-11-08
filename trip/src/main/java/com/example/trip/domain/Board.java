@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "board")
@@ -19,16 +21,16 @@ public class Board {
     private Long boardIndex;
 
     @ManyToOne
-    @JoinColumn(name = "loginId")
+    @JoinColumn(name = "userIndex")
     private Member member;
-
-    @Column(name = "boardId")
-    private String boardId;
 
     @Column(name = "boardTitle")
     private String boardTitle;
 
     @Column(name = "boardContent")
     private Long boardContent;
+
+    @Column(name = "createTime")
+    private LocalDateTime createTime;
 
 }

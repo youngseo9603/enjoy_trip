@@ -23,7 +23,6 @@ public class BoardService {
     }
 
     public void updateBoard(Board board, UpdateBoardRequest request){
-        board.setBoardId(request.getBoardId());
         board.setBoardTitle(request.getBoardTitle());
         board.setBoardContent(request.getBoardContent());
         boardRepository.save(board);
