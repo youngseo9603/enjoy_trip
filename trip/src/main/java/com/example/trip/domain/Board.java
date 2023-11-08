@@ -21,14 +21,14 @@ public class Board {
     private Long boardIndex;
 
     @ManyToOne
-    @JoinColumn(name = "userIndex")
+    @JoinColumn(name = "memberIndex")
     private Member member;
 
     @Column(name = "boardTitle")
     private String boardTitle;
 
     @Column(name = "boardContent")
-    private Long boardContent;
+    private String boardContent;
 
     @Column(name = "createTime")
     private LocalDateTime createTime;

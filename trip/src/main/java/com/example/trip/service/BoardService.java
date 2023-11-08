@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,23 +15,27 @@ import java.util.Optional;
 @Transactional
 public class BoardService {
 
-    private BoardRepository boardRepository;
+    private final BoardRepository boardRepository;
 
-    public Board findById(Long boardIndex){return boardRepository.findById(boardIndex).orElseThrow();}
-
-    public void makeBoard(Board board) {
-        boardRepository .save(board);
+    public List<Board> findAll(){
+        return boardRepository.findAll();
     }
-
-    public void updateBoard(Board board, UpdateBoardRequest request){
-        board.setBoardTitle(request.getBoardTitle());
-        board.setBoardContent(request.getBoardContent());
-        boardRepository.save(board);
-    }
-
-    public void deleteBoard(Board board){
-        boardRepository.delete(board);
-    }
+//
+//    public Board findById(Long boardIndex){return boardRepository.findById(boardIndex).orElseThrow();}
+//
+//    public void makeBoard(Board board) {
+//        boardRepository .save(board);
+//    }
+//
+//    public void updateBoard(Board board, UpdateBoardRequest request){
+//        board.setBoardTitle(request.getBoardTitle());
+//        board.setBoardContent(request.getBoardContent());
+//        boardRepository.save(board);
+//    }
+//
+//    public void deleteBoard(Board board){
+//        boardRepository.delete(board);
+//    }
 
 
 }
