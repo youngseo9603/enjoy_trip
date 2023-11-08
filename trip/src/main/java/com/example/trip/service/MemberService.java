@@ -34,6 +34,10 @@ public class MemberService {
         return memberRepository.findById(id);
     }
 
+    public Long findUserIndexByLoginId(String loginId){
+        return memberRepository.findByLoginId(loginId).getMemberIndex();
+    }
+
     public Member findByLoginID(String id){
         return memberRepository.findByLoginId(id);
     }

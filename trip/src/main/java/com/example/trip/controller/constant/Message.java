@@ -14,5 +14,16 @@ public class Message {
         this.message = null;
     }
 
+    public Message(int status, String message) {
+        this.status = status;
+        this.message = message;
+        this.data = null;
+    }
+
+    public Message(int status, String message, Object data) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
+    }
 
 }

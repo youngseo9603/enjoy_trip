@@ -1,8 +1,11 @@
 package com.example.trip.controller;
 
+import com.example.trip.controller.constant.Message;
+import com.example.trip.controller.constant.StatusCode;
 import com.example.trip.domain.Member;
 import com.example.trip.dto.Member.LoginRequest;
 import com.example.trip.dto.Member.SignInRequest;
+import com.example.trip.dto.Member.UserIndexResponse;
 import com.example.trip.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/user")
 public class MemberController {
 
     @Autowired
@@ -19,26 +22,36 @@ public class MemberController {
     //test
     @GetMapping("/test")
     public ResponseEntity getTest(){
-        return ResponseEntity.ok("success");
+        Message message = new Message(StatusCode.OK, "test success");
+        return ResponseEntity.ok(message);
     }
 
     // 회원 가입 요청
-    @PostMapping
+    @PostMapping("/join")
     public ResponseEntity<?> signUp(@RequestBody SignInRequest request) {
         if(memberService.allowedId(request)){
             memberService.saveMember(request);
-            return ResponseEntity.ok("회원가입");
+            Long memberIndex = memberService.findUserIndexByLoginId(request.getLoginId());
+            UserIndexResponse response = new UserIndexResponse(memberIndex);
+            Message message = new Message(StatusCode.OK, "회원 가입 성공", response);
+            return ResponseEntity.ok(message);
         }
-        else
-            return ResponseEntity.ok("중복된 아이디입니다.");
+        else {
+            Message message = new Message(StatusCode.BAD_REQUEST, "아이디가 중복되었습니다.");
+            return ResponseEntity.ok(message);
+        }
 
     }
 
     //login
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest loginRequest){
-        if(memberService.loginMember(loginRequest))
-            return "successfully login. hello "+loginRequest.getLoginId();
+        if(memberService.loginMember(loginRequest)) {
+            Long memberIndex = memberService.findUserIndexByLoginId(loginRequest.getLoginId());
+            UserIndexResponse response = new UserIndexResponse(memberIndex);
+            Message message = new Message(StatusCode.OK, "로그인 성공", response);
+            return "successfully login. hello " + loginRequest.getLoginId();
+        }
         else
             return "login failed";
     }

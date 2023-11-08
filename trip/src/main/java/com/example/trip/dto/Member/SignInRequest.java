@@ -9,7 +9,8 @@ public class SignInRequest {
 
     private String loginId;
     private String password;
-    private String nickname;
     private String name;
+    private String nickname;
+    private String email;
 
 }
