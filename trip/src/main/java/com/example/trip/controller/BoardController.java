@@ -3,6 +3,7 @@ package com.example.trip.controller;
 import com.example.trip.controller.constant.Message;
 import com.example.trip.domain.Board;
 import com.example.trip.domain.Member;
+import com.example.trip.dto.Board.ListBoardResponse;
 import com.example.trip.dto.Board.UpdateBoardRequest;
 import com.example.trip.service.BoardService;
 import com.example.trip.service.MemberService;
@@ -26,7 +27,7 @@ public class BoardController {
 
     @GetMapping("/list")
     public ResponseEntity<?> getAllBoard(){
-        List<Board> list = boardService.findAll();
+        List<ListBoardResponse> list = boardService.findAll();
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
         Message message = new Message(200, "보드 리스트 조회 성공", list);
