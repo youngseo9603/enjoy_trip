@@ -75,4 +75,7 @@ public class MemberService {
         saveMember(member);
     }
 
+    public Member findMemberByIndex(Long memberIndex){
+        return memberRepository.findByMemberIndex(memberIndex);
+    }
 }
