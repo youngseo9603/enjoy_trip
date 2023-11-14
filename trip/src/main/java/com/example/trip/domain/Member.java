@@ -24,6 +24,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Board> boards;
 
+    @ManyToOne
+    @JoinColumn(name = "memberPlan")
+    private Member memberPlan;
+
     @Column(name = "loginId")
     private String loginId;
 
@@ -38,5 +42,6 @@ public class Member {
 
     @Column(name = "email")
     private String email;
+
 
 }
