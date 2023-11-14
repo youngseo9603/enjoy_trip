@@ -1,8 +1,16 @@
 <template>
 	<header>
-		<nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%">
+		<nav
+			class="navbar navbar-expand-lg bg-body-tertiary header"
+			style="width: 100%"
+		>
 			<div class="container-fluid">
-				<RouterLink class="navbar-brand" to="/">Foodtrip</RouterLink>
+				<RouterLink
+					class="navbar-brand"
+					style="font-family: RixInooAriDuriR; font-size: 25px"
+					to="/"
+					>Foodtrip</RouterLink
+				>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -14,7 +22,11 @@
 				>
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<div
+					class="collapse navbar-collapse"
+					id="navbarSupportedContent"
+					style="font-family: 'TheJamsil5Bold'"
+				>
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-3">
 						<li class="nav-item">
 							<RouterLink class="nav-link" to="/about">여행지</RouterLink>
@@ -26,7 +38,7 @@
 							<RouterLink class="nav-link" to="/post">게시판</RouterLink>
 						</li>
 					</ul>
-					<ul class="navbar-nav mb-2 mb-lg-0 mx-5">
+					<ul class="navbar-nav mb-2 mb-lg-0 mx-3">
 						<li class="nav-item">
 							<RouterLink class="nav-link" to="/login">로그인</RouterLink>
 						</li>
@@ -42,4 +54,10 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+</style>

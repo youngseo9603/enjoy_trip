@@ -11,6 +11,11 @@ import TheFooter from '@/layouts/TheFooter.vue';
 </template>
 
 <style scoped>
+@font-face {
+	font-family: 'NanumBarunGothic';
+	src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
+	font-weight: 400;
+}
 header {
 	line-height: 1.5;
 	max-height: 100vh;
