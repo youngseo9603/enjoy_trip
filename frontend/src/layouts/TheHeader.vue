@@ -11,42 +11,46 @@
 					to="/"
 					>Foodtrip</RouterLink
 				>
-				<button
-					class="navbar-toggler"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span class="navbar-toggler-icon"></span>
+				<button @click="isOpen = !isOpen" class="lg:hidden focus:outline-none">
+					<svg
+						class="w-6 h-6 text-white"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16m-7 6h7"
+						></path>
+					</svg>
 				</button>
-				<div
+				<!-- <div
 					class="collapse navbar-collapse"
 					id="navbarSupportedContent"
 					style="font-family: 'TheJamsil5Bold'"
-				>
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-3">
-						<li class="nav-item">
-							<RouterLink class="nav-link" to="/about">여행지</RouterLink>
-						</li>
-						<li class="nav-item">
-							<RouterLink class="nav-link" to="/about">여행계획하기</RouterLink>
-						</li>
-						<li class="nav-item">
-							<RouterLink class="nav-link" to="/post">게시판</RouterLink>
-						</li>
-					</ul>
-					<ul class="navbar-nav mb-2 mb-lg-0 mx-3">
-						<li class="nav-item">
-							<RouterLink class="nav-link" to="/login">로그인</RouterLink>
-						</li>
-						<li class="nav-item">
-							<RouterLink class="nav-link" to="/signup">회원가입</RouterLink>
-						</li>
-					</ul>
-				</div>
+				> -->
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-3">
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/about">여행지</RouterLink>
+					</li>
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/about">여행계획하기</RouterLink>
+					</li>
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/post">게시판</RouterLink>
+					</li>
+				</ul>
+				<ul class="navbar-nav mb-2 mb-lg-0 mx-3">
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/login">로그인</RouterLink>
+					</li>
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/signup">회원가입</RouterLink>
+					</li>
+				</ul>
 			</div>
 		</nav>
 	</header>
