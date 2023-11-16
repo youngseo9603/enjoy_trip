@@ -1,9 +1,25 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { getPosts } from '@/api/posts';
+import MainItem from '@/components/posts/MainItem.vue';
+const router = useRouter();
+const posts = ref([]);
 const value = ref('');
 const onSearch = searchValue => {
 	console.log('use value', searchValue);
 	console.log('or use this.value', value.value);
+	console.log('태양태양아 힘내');
+};
+const fetchPosts = () => {
+	posts.value = getPosts();
+};
+fetchPosts();
+const goPage = id => {
+	router.push({
+		name: 'PostDetail',
+		params: { id },
+	});
 };
 </script>
 
@@ -38,6 +54,17 @@ const onSearch = searchValue => {
 		>
 			<h3>추천 여행지</h3>
 			<h5>여행지에 맞는 여행 계획을 추천해드려요</h5>
+			<br />
+			<div class="row g-5" style="width: 1000px">
+				<div v-for="post in posts.slice(0, 3)" :key="post.id" class="col-4">
+					<MainItem
+						:title="post.title"
+						:content="post.content"
+						:createdAt="post.createdAt"
+						@click="goPage(post.id)"
+					></MainItem>
+				</div>
+			</div>
 		</div>
 	</main>
 </template>

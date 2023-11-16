@@ -28,6 +28,7 @@
   margin: 0 auto;
   font-weight: normal;
   font-family: NanumSquareNeo-Variable;
+  min-width: 700px;
 }
 
 a,
@@ -56,3 +57,7 @@ a,
     padding: 0 2rem;
   }
 } */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
