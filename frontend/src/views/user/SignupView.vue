@@ -1,11 +1,9 @@
 <template>
 	<div
-		class="container pt-4 mx-auto max-w-xs"
+		class="container pt-5 mx-auto max-w-xs"
 		style="width: 400px; height: 1000px"
 	>
-		<h1 class="logo-font text-4xl text-center py-8 dark:text-gray-300">
-			| SIGN UP |
-		</h1>
+		<h3 class="logo-font text-center py-8 dark:text-gray-300">| SIGN UP |</h3>
 		<form
 			action="{% url 'accounts:signup' %}"
 			class="group"

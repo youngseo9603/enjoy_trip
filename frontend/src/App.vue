@@ -1,25 +1,4 @@
 <script setup>
-<<<<<<< HEAD
-import TheHeader from '@/layouts/TheHeader.vue'
-import TheView from '@/layouts/TheView.vue'
-import TheFooter from '@/layouts/TheFooter.vue'
-import PlanMapPath from './components/PlanMapPath.vue'
-</script>
-
-<template>
-  <!-- <TheHeader> </TheHeader>
-  <TheView> </TheView>
-  <TheFooter> </TheFooter> -->
-  <PlanMapPath></PlanMapPath>
-</template>
-
-<style scoped>
-@font-face {
-  font-family: 'NanumBarunGothic';
-  src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
-  font-weight: 400;
-}
-=======
 import TheHeader from '@/layouts/TheHeader.vue';
 import TheView from '@/layouts/TheView.vue';
 import TheFooter from '@/layouts/TheFooter.vue';
@@ -32,7 +11,11 @@ import TheFooter from '@/layouts/TheFooter.vue';
 </template>
 
 <style scoped>
->>>>>>> 838ed9415a50b6587801e3a12f517fc046615f7e
+@font-face {
+	font-family: 'NanumBarunGothic';
+	src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
+	font-weight: 400;
+}
 header {
 	line-height: 1.5;
 	max-height: 100vh;

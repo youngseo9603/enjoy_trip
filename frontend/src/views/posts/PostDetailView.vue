@@ -14,7 +14,8 @@
 			</div>
 			<div class="col-auto me-auto"></div>
 			<div class="col-auto">
-				<button class="btn btn-outline-dark" @click="goListpage">목록</button>
+				<RouterLink class="nav-link" to="/post?page=1">게시판</RouterLink>
+				<!-- <button class="btn btn-outline-dark" @click="goListpage">목록</button> -->
 			</div>
 			<div class="col-auto">
 				<button class="btn btn-outline-dark" @click="goEditpage">수정</button>

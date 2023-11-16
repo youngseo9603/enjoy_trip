@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="width: 70%">
 		<h2>게시글 수정</h2>
 		<hr />
 		<form @submit.prevent>
