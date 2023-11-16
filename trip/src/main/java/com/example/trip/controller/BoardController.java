@@ -28,7 +28,6 @@ import java.util.Optional;
 public class BoardController {
     private final BoardService boardService;
     private final MemberService memberService;
-
     @GetMapping("/list")
     public ResponseEntity<?> getAllBoard(){
         List<ListBoardResponse> list = boardService.findAll();
