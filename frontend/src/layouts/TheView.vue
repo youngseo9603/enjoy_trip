@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<main>
-			<div>
+			<div class="grid place-items-center">
 				<RouterView></RouterView>
 			</div>
 		</main>

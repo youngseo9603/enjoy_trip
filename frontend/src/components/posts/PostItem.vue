@@ -1,10 +1,7 @@
 <template>
 	<div class="card">
-		<div class="card-body">
+		<div class="card-body flex justify-between">
 			<h5 class="card-title">{{ title }}</h5>
-			<p class="card-text">
-				{{ content }}
-			</p>
 			<p class="text-muted">{{ createdAt }}</p>
 		</div>
 	</div>

@@ -1,8 +1,6 @@
 <template>
 	<div class="container pt-5 mx-auto max-w-xs" style="width: 400px">
-		<h1 class="logo-font text-4xl text-center py-8 dark:text-gray-300">
-			| LOGIN |
-		</h1>
+		<h3 class="logo-font text-center py-8 dark:text-gray-300">| LOGIN |</h3>
 		<form
 			action="{% url 'accounts:login' %}"
 			class="group"

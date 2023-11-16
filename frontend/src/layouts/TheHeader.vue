@@ -34,13 +34,13 @@
 				> -->
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-3">
 					<li class="nav-item">
-						<RouterLink class="nav-link" to="/about">여행지</RouterLink>
+						<RouterLink class="nav-link" to="/search">여행지</RouterLink>
 					</li>
 					<li class="nav-item">
-						<RouterLink class="nav-link" to="/about">여행계획하기</RouterLink>
+						<RouterLink class="nav-link" to="/plan">여행계획하기</RouterLink>
 					</li>
 					<li class="nav-item">
-						<RouterLink class="nav-link" to="/post">게시판</RouterLink>
+						<RouterLink class="nav-link" to="/post?page=1">게시판</RouterLink>
 					</li>
 				</ul>
 				<ul class="navbar-nav mb-2 mb-lg-0 mx-3">

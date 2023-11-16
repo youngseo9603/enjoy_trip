@@ -1,20 +1,20 @@
 <script setup>
-import TheHeader from '@/layouts/TheHeader.vue'
-import TheView from '@/layouts/TheView.vue'
-import TheFooter from '@/layouts/TheFooter.vue'
+import TheHeader from '@/layouts/TheHeader.vue';
+import TheView from '@/layouts/TheView.vue';
+import TheFooter from '@/layouts/TheFooter.vue';
 </script>
 
 <template>
-  <TheHeader> </TheHeader>
-  <TheView> </TheView>
-  <TheFooter> </TheFooter>
+	<TheHeader> </TheHeader>
+	<TheView> </TheView>
+	<TheFooter> </TheFooter>
 </template>
 
 <style scoped>
 @font-face {
-  font-family: 'NanumBarunGothic';
-  src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
-  font-weight: 400;
+	font-family: 'NanumBarunGothic';
+	src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
+	font-weight: 400;
 }
 header {
   line-height: 1.5;
