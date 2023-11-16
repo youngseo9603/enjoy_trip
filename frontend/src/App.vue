@@ -2,19 +2,21 @@
 import TheHeader from '@/layouts/TheHeader.vue'
 import TheView from '@/layouts/TheView.vue'
 import TheFooter from '@/layouts/TheFooter.vue'
+import PlanMapPath from './components/PlanMapPath.vue'
 </script>
 
 <template>
-  <TheHeader> </TheHeader>
+  <!-- <TheHeader> </TheHeader>
   <TheView> </TheView>
-  <TheFooter> </TheFooter>
+  <TheFooter> </TheFooter> -->
+  <PlanMapPath></PlanMapPath>
 </template>
 
 <style scoped>
 @font-face {
-	font-family: 'NanumBarunGothic';
-	src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
-	font-weight: 400;
+  font-family: 'NanumBarunGothic';
+  src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
+  font-weight: 400;
 }
 header {
   line-height: 1.5;
