@@ -33,6 +33,7 @@ public class MemberController {
     // 회원 가입 요청
     @PostMapping("/join")
     public ResponseEntity<?> signUp(@RequestBody SignInRequest request) {
+
         if(memberService.allowedId(request)){
             memberService.saveMember(request);
             Long memberIndex = memberService.findUserIndexByLoginId(request.getLoginId());

@@ -1,8 +1,9 @@
 import { localAxios } from '../utils/http-commons';
 const memberAPI = localAxios();
 
-const getMember = (memberIndex, success, fail) => {
-    memberAPI.post('/user/mypage',memberIndex).then(success).then(fail)
+const signup = (member, success, fail) => {
+    console.log(member)
+    memberAPI.post('/user/join', member).then(success).catch(fail);
 }
 
-export default{getMember}
+export default{signup}

@@ -29,6 +29,7 @@ public class MemberService {
                 .password(request.getPassword())
                 .name(request.getName())
                 .nickname(request.getNickname())
+                .email(request.getEmail())
                 .build();
 
         memberRepository.save(member);
