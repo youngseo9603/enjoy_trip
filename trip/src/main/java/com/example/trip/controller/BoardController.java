@@ -86,7 +86,7 @@ public class BoardController {
     }
 
     @PutMapping("/{boardIndex}")
-    public ResponseEntity<?> modifyBoard(@PathVariable Long boardIndex, String boardTitle, String boardContent){
+    public ResponseEntity<?> modifyBoard(@PathVariable Long boardIndex, @RequestBody Board req){
         Message message;
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -96,9 +96,8 @@ public class BoardController {
             message = new Message(400,"해당 게시판이 없습니다.");
         }
         else{
-            boardDetailResponse.setBoardContent(boardContent);
-            boardDetailResponse.setBoardTitle(boardTitle);
-
+            boardDetailResponse.setBoardContent(req.getBoardContent());
+            boardDetailResponse.setBoardTitle(req.getBoardTitle());
             boardService.modifyBoard(boardDetailResponse);
 
 
@@ -125,4 +124,19 @@ public class BoardController {
         return new ResponseEntity<>(message, header, HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> searchBoards(@RequestParam String query){
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        Message message;
+        List<BoardDetailResponse> ret = boardService.searchBoards(query);
+        if(ret.isEmpty()){
+            message = new Message(400, "게시판이 없습니다.");
+        }
+        else{
+            message = new Message(200, "게시판 검색 성공", ret);
+        }
+
+        return new ResponseEntity<>(message, header, HttpStatus.OK);
+    }
 }

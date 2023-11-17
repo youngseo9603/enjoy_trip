@@ -28,7 +28,7 @@ public class BoardService {
         List<Board> list = boardRepository.findAll();
         List<ListBoardResponse> responseList = new ArrayList<>();
         for(Board b : list){
-            responseList.add(new ListBoardResponse(b.getBoardIndex(), b.getMember().getMemberIndex(),b.getBoardTitle()));
+            responseList.add(new ListBoardResponse(b.getBoardIndex(), b.getBoardTitle(), b.getCreateTime()));
         }
         return responseList;
     }
@@ -37,7 +37,7 @@ public class BoardService {
         Board board = boardRepository.findByBoardIndex(boardIndex);
         if(board==null) return null;
 
-        BoardDetailResponse ret = new BoardDetailResponse(board.getBoardIndex(), board.getMember().getMemberIndex(), board.getBoardTitle(), board.getBoardContent(), board.getCreateTime().toLocalDate());
+        BoardDetailResponse ret = new BoardDetailResponse(board.getBoardIndex(), board.getMember().getMemberIndex(), board.getBoardTitle(), board.getBoardContent(), board.getCreateTime());
         return ret;
     }
 
@@ -62,7 +62,17 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public void deleteBoard(Long boardIndex){
+    public List<BoardDetailResponse> searchBoards(String boardTitle){
+        List<BoardDetailResponse> ret = new ArrayList<>();
+        List<Board> boards = boardRepository.findByBoardTitleContaining(boardTitle);
+        for(Board b: boards){
+            ret.add(new BoardDetailResponse(b.getBoardIndex(), b.getMember().getMemberIndex(),b.getBoardTitle(),b.getBoardContent(),b.getCreateTime()));
+        }
+
+        return ret;
+    }
+
+    public void deleteBoard(Long boardIndex) {
         boardRepository.deleteById(boardIndex);
     }
 }
