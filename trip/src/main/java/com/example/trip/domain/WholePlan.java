@@ -27,8 +27,4 @@ public class WholePlan {
     @Column(name = "endDate")
     private String endDate;
 
-    @ManyToOne
-    @JoinColumn(name = "wholePlanIndex")
-    private MemberPlan memberPlans;
-
 }
