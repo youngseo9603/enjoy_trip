@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,5 +27,9 @@ public class WholePlan {
 
     @Column(name = "endDate")
     private String endDate;
+
+    @ManyToOne
+    @JoinColumn(name = "wholePlans")
+    private MemberPlan memberPlan;
 
 }

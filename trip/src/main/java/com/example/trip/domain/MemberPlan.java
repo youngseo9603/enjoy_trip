@@ -22,10 +22,10 @@ public class MemberPlan {
     @Column(name = "memberPlanIndex")
     private Long memberPlanIndex;
 
-//    @OneToMany(mappedBy = "memberPlan")
-//    private List<Member> members ;
-//
-//    @OneToMany(mappedBy = "wholePlanIndex")
-//    private List<WholePlan> wholePlans;
+    @OneToMany(mappedBy = "memberPlan")
+    private List<Member> members ;
+
+    @OneToMany(mappedBy = "wholePlanIndex")
+    private List<WholePlan> wholePlans;
 
 }

@@ -24,9 +24,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Board> boards;
 
-//    @ManyToOne
-//    @JoinColumn(name = "memberPlan")
-//    private Member memberPlan;
+    @ManyToOne
+    @JoinColumn(name = "memberPlan")
+    private MemberPlan memberPlan;
 
     @Column(name = "loginId")
     private String loginId;
