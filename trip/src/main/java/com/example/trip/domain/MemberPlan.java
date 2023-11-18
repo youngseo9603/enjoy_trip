@@ -25,6 +25,7 @@ public class MemberPlan {
     @OneToMany(mappedBy = "memberPlan")
     private List<Member> members ;
 
-
+    @OneToMany(mappedBy = "wholePlanIndex")
+    private List<WholePlan> wholePlans;
 
 }
