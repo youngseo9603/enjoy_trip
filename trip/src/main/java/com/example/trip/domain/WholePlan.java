@@ -29,7 +29,10 @@ public class WholePlan {
     private String endDate;
 
     @ManyToOne
-    @JoinColumn(name = "wholePlans")
-    private MemberPlan memberPlan;
+    @JoinColumn(name = "planDayIndex")
+    private PlanDay planDay;
+
+    @OneToMany(mappedBy = "wholePlan")
+    private List<MemberPlan> memberPlans;
 
 }

@@ -5,6 +5,8 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,4 +29,9 @@ public class Plan {
 
     @Column(name = "endTime")
     private Timestamp endTime;
+
+    @ManyToOne
+    @JoinColumn(name = "placeIndex")
+    private Place place;
+
 }

@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,9 +26,11 @@ public class Place {
     @Embedded
     private Address address;
 
-    @Column(name  = "placeName")
     private String placeName;
 
-    @Column(name = "category")
     private String category;
+
+    @OneToMany(mappedBy = "place")
+    private List<Plan> plans;
+
 }
