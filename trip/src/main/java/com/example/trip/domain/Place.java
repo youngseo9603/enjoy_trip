@@ -6,28 +6,31 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 import javax.persistence.*;
 import java.util.List;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "memberPlan")
+@Table(name = "Place")
 @Getter
 @Setter
 @Data
 @ConstructorBinding
-public class MemberPlan {
+public class Place {
 
     @Id
     @GeneratedValue
-    @Column(name = "memberPlanIndex")
-    private Long memberPlanIndex;
+    @Column(name = "placeIndex")
+    private Long placeIndex;
 
-    @ManyToOne
-    @JoinColumn(name = "memberIndex")
-    private Member member;
+    @Embedded
+    private Address address;
 
-    @ManyToOne
-    @JoinColumn(name = "wholePlanIndex")
-    private WholePlan wholePlan;
+    private String placeName;
+
+    private String category;
+
+    @OneToMany(mappedBy = "place")
+    private List<Plan> plans;
 
 }

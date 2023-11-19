@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +29,10 @@ public class WholePlan {
     private String endDate;
 
     @ManyToOne
-    @JoinColumn(name = "wholePlanIndex")
-    private MemberPlan memberPlans;
+    @JoinColumn(name = "planDayIndex")
+    private PlanDay planDay;
+
+    @OneToMany(mappedBy = "wholePlan")
+    private List<MemberPlan> memberPlans;
 
 }

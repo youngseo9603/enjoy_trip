@@ -4,7 +4,9 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -24,9 +26,8 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Board> boards;
 
-    @ManyToOne
-    @JoinColumn(name = "memberPlan")
-    private Member memberPlan;
+    @OneToMany(mappedBy = "member")
+    private List<MemberPlan> memberPlans;
 
     @Column(name = "loginId")
     private String loginId;
