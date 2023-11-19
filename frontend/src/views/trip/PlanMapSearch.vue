@@ -1,10 +1,10 @@
 <template>
+	<div id="map"></div>
 	<div>
 		<form @submit.prevent="searchLoc()">
 			<input v-model="searchText" placeholder="검색어를 입력하세요." />
 			<button>검색</button>
 		</form>
-		<div id="map"></div>
 	</div>
 </template>
 

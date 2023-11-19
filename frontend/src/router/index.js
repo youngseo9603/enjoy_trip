@@ -5,9 +5,14 @@ import PostDetailView from '@/views/posts/PostDetailView.vue';
 import PostEditView from '@/views/posts/PostEditView.vue';
 import LoginView from '@/views/user/LoginView.vue';
 import SignupView from '@/views/user/SignupView.vue';
+import MyPageView from '@/views/user/MyPageView.vue';
 import SearchLocView from '@/views/trip/SearchLoc.vue';
+import PlanDateView from '@/views/trip/PlanDate.vue';
+import PlanLocationView from '@/views/trip/PlanLocation.vue';
+import PlanTripView from '@/views/trip/PlanTrip.vue';
 import PlanMapPathView from '@/views/trip/PlanMapPath.vue';
-import PlanMapSearchView from '@/views/trip/PlanMapSearch.vue';
+
+// import PlanMapSearchView from '@/views/trip/PlanMapSearch.vue';
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
@@ -20,6 +25,11 @@ const router = createRouter({
 			path: '/about',
 			name: 'about',
 			component: () => import('../views/AboutView.vue'),
+		},
+		{
+			path: '/mypage',
+			name: 'mypage',
+			component: MyPageView,
 		},
 		{
 			path: '/post',
@@ -46,7 +56,17 @@ const router = createRouter({
 		{
 			path: '/plan',
 			name: 'plan',
-			component: PlanMapSearchView,
+			component: PlanTripView,
+		},
+		{
+			path: '/plandate',
+			name: 'planDate',
+			component: PlanDateView,
+		},
+		{
+			path: '/planlocation',
+			name: 'planLocation',
+			component: PlanLocationView,
 		},
 		{
 			path: '/path',
