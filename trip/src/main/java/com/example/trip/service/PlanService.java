@@ -3,8 +3,10 @@ package com.example.trip.service;
 import com.example.trip.domain.Member;
 import com.example.trip.domain.MemberPlan;
 import com.example.trip.domain.WholePlan;
+import com.example.trip.dto.Plan.Plan;
 import com.example.trip.dto.Plan.PlanInfo;
 import com.example.trip.dto.Plan.PlanListResponse;
+import com.example.trip.dto.Plan.WholePlanResponse;
 import com.example.trip.repository.MemberPlanRepository;
 import com.example.trip.repository.MemberRepository;
 import com.example.trip.repository.WholePlanRepository;
@@ -40,5 +42,11 @@ public class PlanService {
 
         return planListResponse;
     }
+
+    public WholePlan findWholePlanByWholePlanIndex(Long wholePlanIndex){
+        WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
+        return wholePlan;
+    }
+
 
 }

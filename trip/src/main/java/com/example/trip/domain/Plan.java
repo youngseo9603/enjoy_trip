@@ -30,6 +30,9 @@ public class Plan {
     @Column(name = "endTime")
     private Timestamp endTime;
 
+    @Column(name = "order")
+    private int order;
+
     @ManyToOne
     @JoinColumn(name = "placeIndex")
     private Place place;
