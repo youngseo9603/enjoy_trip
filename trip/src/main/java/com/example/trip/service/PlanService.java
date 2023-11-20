@@ -2,6 +2,8 @@ package com.example.trip.service;
 
 import com.example.trip.domain.Member;
 import com.example.trip.domain.MemberPlan;
+import com.example.trip.domain.WholePlan;
+import com.example.trip.dto.Plan.PlanInfo;
 import com.example.trip.dto.Plan.PlanListResponse;
 import com.example.trip.repository.MemberPlanRepository;
 import com.example.trip.repository.MemberRepository;
@@ -22,10 +24,21 @@ public class PlanService {
     private final WholePlanRepository wholePlanRepository;
     private final MemberPlanRepository memberPlanRepository;
 
-//    public List<PlanListResponse> findPlanListByMemberIndex(Long memberIndex){
-//        List<MemberPlan> memberPlans = new ArrayList<>();
-//
-//        return 0;
-//    }
+
+    //사용자 plan list 출력
+    public PlanListResponse findPlanListByMemberIndex(Long memberIndex){
+        List<PlanInfo> planInfos = new ArrayList<>();
+
+        List<MemberPlan> memberPlans = memberPlanRepository.findAllByMember_MemberIndex(memberIndex);
+
+        for(MemberPlan m : memberPlans){
+            WholePlan wholePlan = m.getWholePlan();
+            planInfos.add(new PlanInfo(wholePlan.getWholePlanIndex(), wholePlan.getTitle(), wholePlan.getStartDate(), wholePlan.getEndDate()));
+        }
+
+        PlanListResponse planListResponse = new PlanListResponse(1, planInfos);
+
+        return planListResponse;
+    }
 
 }
