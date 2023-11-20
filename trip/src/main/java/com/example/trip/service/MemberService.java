@@ -46,6 +46,9 @@ public class MemberService {
 
     public boolean loginMember(LoginRequest request){
         Member member = memberRepository.findByLoginId(request.getLoginId());
+        if(member == null)
+            return false;
+
         if(member.getPassword().equals(request.getPassword()))
             return true;
         else
