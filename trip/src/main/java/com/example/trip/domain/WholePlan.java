@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @AllArgsConstructor
@@ -23,10 +25,13 @@ public class WholePlan {
     private Long wholePlanIndex;
 
     @Column(name = "startDate")
-    private String startDate;
+    private Timestamp startDate;
 
     @Column(name = "endDate")
-    private String endDate;
+    private Timestamp endDate;
+
+    @Column(name = "Title")
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "planDayIndex")
