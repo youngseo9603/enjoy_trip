@@ -43,7 +43,10 @@
 			</ul>
 
 			<!-- 사용자 인증 링크 -->
-			<ul class="flex mb-2 mb-lg-0 mx-3 space-x-4">
+			<ul
+				class="flex mb-2 mb-lg-0 mx-3 space-x-4"
+				v-if="$store.state.account.memberIndex === 0"
+			>
 				<li class="nav-item">
 					<RouterLink class="nav-link" to="/login">로그인</RouterLink>
 				</li>
@@ -52,7 +55,7 @@
 				</li>
 			</ul>
 			<!-- 로그인했을시 -->
-			<div>
+			<div v-else>
 				<RouterLink class="nav-link" to="/mypage"
 					>안녕하세요 좌소연님</RouterLink
 				>
@@ -63,12 +66,14 @@
 
 <script setup>
 import { ref } from 'vue';
-
+import store from '@/stores/index';
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
 	isMenuOpen.value = !isMenuOpen.value;
 };
+
+
 </script>
 
 <style lang="scss" scoped>
