@@ -27,11 +27,11 @@ public class PlanDay {
     @Column(name = "Date")
     private Timestamp Date;
 
-    @ManyToOne
-    @JoinColumn(name = "planIndex")
-    private Plan plan;
-
     @OneToMany(mappedBy = "planDay")
-    private List<WholePlan> wholePlans;
+    private List<Plan> plan;
+
+    @ManyToOne
+    @JoinColumn(name = "wholePlanIndex")
+    private WholePlan wholePlan;
 
 }

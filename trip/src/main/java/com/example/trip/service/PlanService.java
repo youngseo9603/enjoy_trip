@@ -1,14 +1,13 @@
 package com.example.trip.service;
 
 import com.example.trip.domain.Member;
-import com.example.trip.domain.MemberPlan;
 import com.example.trip.domain.WholePlan;
+import com.example.trip.dto.Plan.CreateWholePlanRequest;
 import com.example.trip.dto.Plan.Plan;
-import com.example.trip.dto.Plan.PlanInfo;
-import com.example.trip.dto.Plan.PlanListResponse;
-import com.example.trip.dto.Plan.WholePlanResponse;
-import com.example.trip.repository.MemberPlanRepository;
+import com.example.trip.dto.Plan.PlanDay;
 import com.example.trip.repository.MemberRepository;
+import com.example.trip.repository.PlanDayRepository;
+import com.example.trip.repository.PlanRepository;
 import com.example.trip.repository.WholePlanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,28 +22,49 @@ import java.util.Optional;
 public class PlanService {
 
     private final WholePlanRepository wholePlanRepository;
-    private final MemberPlanRepository memberPlanRepository;
+    private final MemberRepository memberRepository;
+    private final PlanDayRepository planDayRepository;
+    private final PlanRepository planRepository;
 
 
     //사용자 plan list 출력
-    public PlanListResponse findPlanListByMemberIndex(Long memberIndex){
-        List<PlanInfo> planInfos = new ArrayList<>();
-
-        List<MemberPlan> memberPlans = memberPlanRepository.findAllByMember_MemberIndex(memberIndex);
-
-        for(MemberPlan m : memberPlans){
-            WholePlan wholePlan = m.getWholePlan();
-            planInfos.add(new PlanInfo(wholePlan.getWholePlanIndex(), wholePlan.getTitle(), wholePlan.getStartDate(), wholePlan.getEndDate()));
-        }
-
-        PlanListResponse planListResponse = new PlanListResponse(1, planInfos);
-
-        return planListResponse;
+    public List<WholePlan> findPlanListByMemberIndex(Long memberIndex){
+        List<WholePlan> list = wholePlanRepository.findAllByMember_MemberIndex(memberIndex);
+        return list;
     }
 
     public WholePlan findWholePlanByWholePlanIndex(Long wholePlanIndex){
         WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
         return wholePlan;
+    }
+
+    public void createWholePlan(CreateWholePlanRequest request, Long memberIndex){
+
+        WholePlan wholePlan = WholePlan.builder()
+                .title(request.getTitle())
+                .member(memberRepository.findByMemberIndex(memberIndex))
+                .startDate(request.getStartDate())
+                .endDate(request.getEndDate())
+                .build();
+
+        wholePlanRepository.save(wholePlan);
+
+        for(PlanDay planDay : request.getPlanDays()){
+            com.example.trip.domain.PlanDay pd = com.example.trip.domain.PlanDay.builder()
+                            .Date(planDay.getDate()).build();
+            planDayRepository.save(pd);
+
+            for(Plan plan : planDay.getPlans()){
+                com.example.trip.domain.Plan p = com.example.trip.domain.Plan.builder()
+                        .address(plan.getAddress())
+                        .placeName(plan.getPlaceName())
+                        .category(plan.getCategory())
+                        .orders(plan.getOrder())
+                        .build();
+                planRepository.save(p);
+            }
+        }
+
     }
 
 
