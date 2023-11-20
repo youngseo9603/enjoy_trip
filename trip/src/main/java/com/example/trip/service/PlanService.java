@@ -1,5 +1,6 @@
 package com.example.trip.service;
 
+import com.example.trip.domain.Address;
 import com.example.trip.domain.Member;
 import com.example.trip.domain.WholePlan;
 import com.example.trip.dto.Plan.CreateWholePlanRequest;
@@ -51,7 +52,9 @@ public class PlanService {
 
         for(PlanDay planDay : request.getPlanDays()){
             com.example.trip.domain.PlanDay pd = com.example.trip.domain.PlanDay.builder()
-                            .Date(planDay.getDate()).build();
+                    .Date(planDay.getDate())
+                    .wholePlan(wholePlan)
+                    .build();
             planDayRepository.save(pd);
 
             for(Plan plan : planDay.getPlans()){
@@ -60,6 +63,7 @@ public class PlanService {
                         .placeName(plan.getPlaceName())
                         .category(plan.getCategory())
                         .orders(plan.getOrder())
+                        .planDay(pd)
                         .build();
                 planRepository.save(p);
             }

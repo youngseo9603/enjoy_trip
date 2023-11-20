@@ -1,15 +1,21 @@
 package com.example.trip.domain;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
-
-    String addr1;
-    String addr2;
-    String longtitude;
-    String zipcode;
+    private String addr1;
+    private String addr2;
+    private String longtitude;
+    private String zipcode;
 
 }
