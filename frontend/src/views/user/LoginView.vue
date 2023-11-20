@@ -57,7 +57,7 @@
 import { reactive, computed, ref } from 'vue'
 import memberAPI from '@/api/member.js'
 import { useRoute, useRouter } from 'vue-router'
-
+import store from '@/stores/index'
 const route = useRoute()
 const router = useRouter()
 
@@ -87,6 +87,8 @@ const login = () => {
       console.log(data.message)
       alert(data.message)
       if (data.status == 200) {
+        sessionStorage.setItem('memberIndex', data.data.memberIndex)
+        store.commit('setAccount', data.data.memberIndex)
         goMainPage()
       }
     },
