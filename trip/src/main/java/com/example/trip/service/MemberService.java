@@ -49,6 +49,7 @@ public class MemberService {
 
         if(member==null) return false;
 
+
         if(member.getPassword().equals(request.getPassword()))
             return true;
         else
