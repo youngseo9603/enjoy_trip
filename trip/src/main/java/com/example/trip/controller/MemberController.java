@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -50,13 +51,16 @@ public class MemberController {
 
     //login
     @PostMapping("/login")
-    public ResponseEntity login(HttpSession session, @RequestBody LoginRequest loginRequest){
+    public ResponseEntity login(HttpServletRequest httpServletRequest,@RequestBody LoginRequest loginRequest){
 
         if(memberService.loginMember(loginRequest)) {
             Long memberIndex = memberService.findUserIndexByLoginId(loginRequest.getLoginId());
             UserIndexResponse response = new UserIndexResponse(memberIndex);
 
+            httpServletRequest.getSession().invalidate();
+            HttpSession session = httpServletRequest.getSession(true);
             session.setAttribute("memberIndex", memberIndex);
+
 
             Message message = new Message(StatusCode.OK, "로그인 성공", response);
             return ResponseEntity.ok(message);
@@ -66,7 +70,6 @@ public class MemberController {
             return ResponseEntity.ok(message);
         }
     }
-
     //회원 삭제
     @DeleteMapping
     public ResponseEntity<?> deleteMember(@RequestBody LoginRequest request){

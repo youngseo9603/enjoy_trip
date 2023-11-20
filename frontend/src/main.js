@@ -8,9 +8,13 @@ import 'ant-design-vue/dist/reset.css';
 import 'tailwindcss/tailwind.css';
 import App from './App.vue';
 import router from './router';
+import stores from "@/stores/index";
+import vuex from 'vuex';
 const app = createApp(App);
 app.use(DatePicker);
-app.use(createPinia());
+app.use(createPinia()); 
 app.use(router);
+app.use(stores);
+app.use(vuex);
 
 app.mount('#app');

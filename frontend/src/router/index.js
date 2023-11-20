@@ -11,6 +11,7 @@ import PlanDateView from '@/views/trip/PlanDate.vue';
 import PlanLocationView from '@/views/trip/PlanLocation.vue';
 import PlanTripView from '@/views/trip/PlanTrip.vue';
 import PlanMapPathView from '@/views/trip/PlanMapPath.vue';
+import PostCreateView from '@/views/posts/PostCreateView.vue';
 
 // import PlanMapSearchView from '@/views/trip/PlanMapSearch.vue';
 const router = createRouter({
@@ -82,6 +83,11 @@ const router = createRouter({
 			path: '/signup',
 			name: 'signUp',
 			component: SignupView,
+		},
+		{
+			path: '/create',
+			name: 'postCreate',
+			component : PostCreateView
 		},
 	],
 });
