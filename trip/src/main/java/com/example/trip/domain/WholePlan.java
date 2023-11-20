@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class WholePlan {
     private Long wholePlanIndex;
 
     @Column(name = "startDate")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "endDate")
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column(name = "Title")
     private String title;
