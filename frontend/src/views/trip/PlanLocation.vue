@@ -9,7 +9,6 @@
 		</div>
 
 		<div class="col-span-4">
-			<h1>관광지 리스트</h1>
 			<table id="list">
 				<thead>
 					<th style="width: 50px">번호</th>
@@ -138,9 +137,13 @@ export default {
 				const category = document.createElement('div');
 				category.innerText = data.category_group_name;
 
+				const selectwish = document.createElement('button');
+				selectwish.innerText = '담기';
+
 				content.appendChild(placeName);
 				content.appendChild(address);
 				content.appendChild(category);
+				content.appendChild(selectwish);
 
 				infowindow.setContent(content);
 				infowindow.setPosition(marker.getPosition());

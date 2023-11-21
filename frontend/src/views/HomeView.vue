@@ -33,19 +33,21 @@ const goPage = id => {
 			>
 				<h2 class="text-white">나만의 여행 플래너 어스토리</h2>
 				<h4 class="text-white">쉽고 빠르게 계획하세요.</h4>
-				<a-space direction="vertical">
-					<a-input-search
-						v-model:value="value"
-						placeholder="여행지를 검색해주세요"
-						size="large"
-						@search="onSearch"
-						style="width: 500px"
-					>
-						<template #enterButton>
-							<a-button>검색</a-button>
-						</template>
-					</a-input-search>
-				</a-space>
+				<router-link to="/search"
+					><a-space direction="vertical">
+						<a-input-search
+							v-model:value="value"
+							placeholder="여행지를 검색해주세요"
+							size="large"
+							@search="onSearch"
+							style="width: 500px"
+						>
+							<template #enterButton>
+								<a-button>검색</a-button>
+							</template>
+						</a-input-search>
+					</a-space></router-link
+				>
 			</div>
 		</div>
 		<div

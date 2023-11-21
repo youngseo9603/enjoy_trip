@@ -9,10 +9,9 @@
 		</div>
 
 		<div class="col-span-4">
-			<h1>관광지 리스트</h1>
 			<table id="list">
 				<thead>
-					<th style="width: 50px">번호</th>
+					<th style="width: 50px"></th>
 					<th style="width: 170px">장소</th>
 					<th style="width: 200px">주소</th>
 					<th style="width: 200px">번호</th>
@@ -171,7 +170,7 @@ export default {
 			const newCell3 = newRow.insertCell(3);
 			const newCell4 = newRow.insertCell(4);
 
-			newCell0.innerText = i + 1;
+			// newCell0.innerText = i + 1;
 			newCell1.innerText = data.place_name;
 			newCell2.innerText = data.address_name;
 			newCell3.innerText = data.phone;
