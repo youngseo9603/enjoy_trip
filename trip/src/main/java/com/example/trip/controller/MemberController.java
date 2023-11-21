@@ -109,4 +109,11 @@ public class MemberController {
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping("/nickname")
+    public ResponseEntity<?> getNickName(@RequestParam Long memberIndex){
+        String nickName = memberService.findNickName(memberIndex);
+
+        Message message = new Message(StatusCode.OK, "닉네임 가져오기 성공",nickName);
+        return ResponseEntity.ok(message);
+    }
 }

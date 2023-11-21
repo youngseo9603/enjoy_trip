@@ -83,4 +83,8 @@ public class MemberService {
     public Member findMemberByIndex(Long memberIndex){
         return memberRepository.findByMemberIndex(memberIndex);
     }
+
+    public String findNickName(Long memberIndex){
+        return memberRepository.findByMemberIndex(memberIndex).getNickname();
+    }
 }
