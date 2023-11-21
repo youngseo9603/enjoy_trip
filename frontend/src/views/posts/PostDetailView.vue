@@ -18,10 +18,10 @@
 				<RouterLink class="nav-link" to="/post?page=1">게시판</RouterLink>
 				<!-- <button class="btn btn-outline-dark" @click="goListpage">목록</button> -->
 			</div>
-			<div class="col-auto">
+			<div class="col-auto" v-if="isEqual">
 				<button class="btn btn-outline-dark" @click="goEditpage">수정</button>
 			</div>
-			<div class="col-auto">
+			<div class="col-auto" v-if="isEqual">
 				<button class="btn btn-outline-dark" @click="removeBoard">삭제</button>
 			</div>
 		</div>
@@ -34,6 +34,8 @@ import boardAPI from '@/api/board.js';
 import memberAPI from '@/api/member.js';
 import { ref } from 'vue';
 import member from '../../api/member';
+import store from '@/stores/index';
+
 
 const route = useRoute();
 const router = useRouter();
@@ -42,6 +44,7 @@ const goListpage = () => router.push({ name: 'PostList' });
 const goEditpage = () => router.push({ name: 'PostEdit', params: { id } });
 const board = ref({});
 const memberNickName = ref('');
+const isEqual = ref(false);
 
 const getDetailBoard = () => {
 	boardAPI.getDetailBoard(
@@ -80,7 +83,20 @@ const removeBoard = () => {
 	);
 };
 
+const decideEqual = () => {
+	var tmp = store.state.account.memberIndex;
+
+	console.log(tmp);
+	console.log(id);
+	if (tmp != 0) {
+		if (tmp == id) {
+			isEqual.value = true;
+		}
+	}
+}
+
 getDetailBoard();
+decideEqual();
 </script>
 
 <style lang="scss" scoped></style>

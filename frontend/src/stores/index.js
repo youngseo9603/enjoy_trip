@@ -24,6 +24,10 @@ const store = createStore({
                 	},
                 );
 		},
+        deleteAccount(state){
+            state.account.memberIndex = 0;
+            state.account.memberNickName = '';
+        }
 	},
 });
 
