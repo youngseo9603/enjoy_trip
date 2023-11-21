@@ -83,13 +83,6 @@ const router = createRouter({
 			path: '/plan',
 			name: 'plan',
 			component: PlanTripView,
-			children: [
-				{
-					path: '',
-					name: 'PlanMapPath',
-					component: PlanMapPathView,
-				},
-			],
 		},
 		{
 			path: '/plandate',

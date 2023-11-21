@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,7 +13,7 @@ import java.util.List;
 public class PlanDay {
 
     private Long playDayIndex;
-    private Timestamp date;
+    private LocalDate date;
     private List<Plan> plans;
 
 }

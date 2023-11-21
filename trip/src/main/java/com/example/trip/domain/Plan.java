@@ -24,17 +24,20 @@ public class Plan {
     @Column(name = "planIndex")
     private Long planIndex;
 
-    @Column(name = "startTime")
-    private Timestamp startTime;
+    @Embedded
+    private Address address;
 
-    @Column(name = "endTime")
-    private Timestamp endTime;
+    @Column(name = "placeName")
+    private String placeName;
 
-    @Column(name = "order")
-    private int order;
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "orders")
+    private int orders;
 
     @ManyToOne
-    @JoinColumn(name = "placeIndex")
-    private Place place;
+    @JoinColumn(name = "planDayIndex")
+    private PlanDay planDay;
 
 }

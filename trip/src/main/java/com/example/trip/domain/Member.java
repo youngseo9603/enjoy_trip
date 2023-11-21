@@ -27,7 +27,7 @@ public class Member {
     private List<Board> boards;
 
     @OneToMany(mappedBy = "member")
-    private List<MemberPlan> memberPlans;
+    private List<WholePlan> wholePlans;
 
     @Column(name = "loginId")
     private String loginId;

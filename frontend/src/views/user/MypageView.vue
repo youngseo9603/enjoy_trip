@@ -10,6 +10,7 @@
 		</div>
 		<div class="col-span-3"><router-view></router-view></div>
 	</div>
+
 </template>
 
 <script setup></script>

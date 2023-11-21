@@ -1,9 +1,7 @@
 <template>
-	<div class="page-title">
-		<h3>여행 계획하기</h3>
-	</div>
 	<div class="flex back">
 		<div>
+			<p>여행 계획하기</p>
 			<form action="">
 				<input
 					type="text"

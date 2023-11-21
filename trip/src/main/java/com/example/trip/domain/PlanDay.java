@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -25,13 +26,13 @@ public class PlanDay {
 
 
     @Column(name = "Date")
-    private Timestamp Date;
-
-    @ManyToOne
-    @JoinColumn(name = "planIndex")
-    private Plan plan;
+    private LocalDate Date;
 
     @OneToMany(mappedBy = "planDay")
-    private List<WholePlan> wholePlans;
+    private List<Plan> plan;
+
+    @ManyToOne
+    @JoinColumn(name = "wholePlanIndex")
+    private WholePlan wholePlan;
 
 }
