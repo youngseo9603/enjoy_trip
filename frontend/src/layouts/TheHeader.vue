@@ -57,7 +57,9 @@
 			<!-- 로그인했을시 -->
 			<ul v-else>
 				<li class="nav-item">
-					<RouterLink class="nav-link" to="/mypage">안녕하세요 {{ store.state.account.memberNickName }}님</RouterLink>
+					<RouterLink class="nav-link" to="/mypage"
+						>안녕하세요 {{ store.state.account.memberNickName }}님</RouterLink
+					>
 				</li>
 				<li class="nav-item">
 					<p class="nav-link" @click="logout">로그아웃</p>
@@ -75,7 +77,6 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
-
 const goMainPage = () => router.push({ name: 'home' });
 
 const isMenuOpen = ref(false);
@@ -83,14 +84,12 @@ const isMenuOpen = ref(false);
 const toggleMenu = () => {
 	isMenuOpen.value = !isMenuOpen.value;
 };
-
-function logout(){
+function logout() {
 	sessionStorage.removeItem('memberIndex');
 	store.commit('deleteAccount');
-	alert("로그아웃 성공");
+	alert('로그아웃 성공');
 	goMainPage();
 }
-
 </script>
 
 <style lang="scss" scoped>
