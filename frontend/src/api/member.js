@@ -10,11 +10,14 @@ const login = (LoginRequest, success, fail) => {
 }
 
 const getNickName = (memberIndex, success, fail) =>{
-    console.log("memberIndex",memberIndex);
 	memberAPI
 		.get(`user/nickname?memberIndex=${memberIndex}`)
 		.then(success)
 		.catch(fail);
 }
 
-export default{signup, login, getNickName}
+const getMyInfo = (memberIndex, success, fail) => {
+	memberAPI.post('/user/mypage', memberIndex).then(success).catch(fail);
+}
+
+export default{signup, login, getNickName, getMyInfo}

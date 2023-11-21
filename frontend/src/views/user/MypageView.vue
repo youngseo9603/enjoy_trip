@@ -5,12 +5,12 @@
 			<br />
 			<br />
 			<br />
-			<div class="text-center">좌소연</div>
-			<div class="text-center">jwajwa@jwawjwa.com</div>
+			<div class="text-center">{{ member.name }}</div>
+			<div class="text-center">{{ member.email }}</div>
 			<br />
 			<br />
 			<ul>
-				<router-link to="/mypage"
+				<router-link to="/mypage/" 
 					><li>
 						<img src="@/assets/icon/info.svg" alt="SVG Icon" />내 정보
 					</li></router-link
@@ -25,18 +25,35 @@
 						<img src="@/assets/icon/pencil.svg" alt="SVG Icon" />내가 쓴 글
 					</li></router-link
 				>
-				<router-link to="/mypage/mycomment"
-					><li>
-						<img src="@/assets/icon/comment.svg" alt="SVG Icon" />내가 쓴 댓글
-					</li></router-link
-				>
 			</ul>
 		</div>
 		<div class="col-span-3"><router-view></router-view></div>
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import memberAPI from '@/api/member.js';
+import store from '@/stores/index';
+import { ref } from 'vue';
+
+var member = ref({});
+
+const startMyPage = () =>{
+	memberAPI.getMyInfo(
+		store.state.account.memberIndex,
+		({ data }) => {
+			member.value = data.data;
+		},
+		() => {
+			console.log('마이 데이터 정보 불러오기 실패');
+		},
+	);
+}
+
+
+
+startMyPage();
+</script>
 
 <style lang="scss" scoped>
 ul {

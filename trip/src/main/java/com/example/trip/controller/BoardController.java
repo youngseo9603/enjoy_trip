@@ -137,4 +137,17 @@ public class BoardController {
 
         return new ResponseEntity<>(message, header, HttpStatus.OK);
     }
+
+
+    @GetMapping("/search/member")
+    public ResponseEntity<?> searchBoardsByMemberIndex(@RequestParam Long memberIndex){
+        Message message;
+        List<ListBoardResponse> ret = boardService.findBoardByMemberIndex(memberIndex);
+
+        message = new Message(200, "게시판 검색 성공", ret);
+
+        return ResponseEntity.ok(message);
+    }
+
+
 }

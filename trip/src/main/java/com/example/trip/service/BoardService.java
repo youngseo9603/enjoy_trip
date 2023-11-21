@@ -1,6 +1,7 @@
 package com.example.trip.service;
 
 import com.example.trip.domain.Board;
+import com.example.trip.domain.Member;
 import com.example.trip.dto.Board.BoardDetailResponse;
 import com.example.trip.dto.Board.BoardRegisterRequest;
 import com.example.trip.dto.Board.ListBoardResponse;
@@ -75,5 +76,23 @@ public class BoardService {
 
     public void deleteBoard(Long boardIndex) {
         boardRepository.deleteById(boardIndex);
+    }
+
+    public List<ListBoardResponse> findBoardByMemberIndex(Long memberIndex){
+        Member member = memberRepository.findByMemberIndex(memberIndex);
+        List<Board> boards = member.getBoards();
+
+        List<ListBoardResponse> ret = new ArrayList<>();
+        for(Board b: boards){
+            ListBoardResponse tmp = ListBoardResponse.builder()
+                    .boardIndex(b.getBoardIndex())
+                    .boardTitle(b.getBoardTitle())
+                    .createTime(b.getCreateTime())
+                    .build();
+            ret.add(tmp);
+        }
+
+
+        return ret;
     }
 }

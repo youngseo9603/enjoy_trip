@@ -1,4 +1,5 @@
 import { localAxios } from '../utils/http-commons';
+import member from './member';
 const boardAPI = localAxios();
 const getList = (sucess, fail) => {
 	boardAPI.get('/board/list').then(sucess).catch(fail);
@@ -29,6 +30,10 @@ const registerBoard = (board, success, fail) =>{
 		.then(success)
 		.catch(fail);
 };
+
+const searchBoardsByMemberIndex = (memberIndex, success, fail) => {
+	boardAPI.get(`/board/search/member?memberIndex=${memberIndex}`).then(success).catch(fail);
+}
 export default {
 	getList,
 	getDetailBoard,
@@ -36,4 +41,5 @@ export default {
 	updateBoard,
 	searchBoards,
 	registerBoard,
+	searchBoardsByMemberIndex,
 };

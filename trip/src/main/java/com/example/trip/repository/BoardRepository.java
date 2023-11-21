@@ -14,4 +14,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
         List<Board> findByBoardTitleContaining(String boardTitle);
 
+
+
 }
