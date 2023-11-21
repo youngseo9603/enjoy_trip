@@ -1,5 +1,5 @@
 <template>
-	<div>내정보</div>
+	<div>내 정보</div>
 </template>
 
 <script setup></script>

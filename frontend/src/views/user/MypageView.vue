@@ -14,4 +14,27 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	background-color: #f1f1f1; /* Optional background color */
+}
+
+li {
+	margin: 5px;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #ddd; /* Optional background color */
+}
+
+a {
+	text-decoration: none;
+	color: #333; /* Optional text color */
+}
+
+li:hover {
+	background-color: #bbb; /* Optional hover background color */
+}
+</style>
