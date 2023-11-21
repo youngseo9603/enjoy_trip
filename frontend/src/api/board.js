@@ -20,10 +20,20 @@ const updateBoard = (board, success, fail) => {
 const searchBoards = (query, success, fail) => {
 	boardAPI.get(`/board/search?query=${query}`).then(success).catch(fail);
 };
+
+const registerBoard = (board, success, fail) =>{
+	boardAPI
+		.post(
+			'/board/register', board
+		)
+		.then(success)
+		.catch(fail);
+};
 export default {
 	getList,
 	getDetailBoard,
 	removeBoard,
 	updateBoard,
 	searchBoards,
+	registerBoard,
 };

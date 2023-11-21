@@ -18,10 +18,10 @@
 				<RouterLink class="nav-link" to="/post?page=1">게시판</RouterLink>
 				<!-- <button class="btn btn-outline-dark" @click="goListpage">목록</button> -->
 			</div>
-			<div class="col-auto">
+			<div class="col-auto" v-if="isEqual">
 				<button class="btn btn-outline-dark" @click="goEditpage">수정</button>
 			</div>
-			<div class="col-auto">
+			<div class="col-auto" v-if="isEqual">
 				<button class="btn btn-outline-dark" @click="removeBoard">삭제</button>
 			</div>
 		</div>
@@ -33,6 +33,8 @@ import { useRoute, useRouter } from 'vue-router';
 import boardAPI from '@/api/board.js';
 import memberAPI from '@/api/member.js';
 import { ref } from 'vue';
+import store from '@/stores/index';
+
 
 const route = useRoute();
 const router = useRouter();
@@ -41,17 +43,34 @@ const goListpage = () => router.push({ name: 'PostList' });
 const goEditpage = () => router.push({ name: 'PostEdit', params: { id } });
 const board = ref({});
 const memberNickName = ref('');
+const isEqual = ref(false);
 
 const getDetailBoard = () => {
 	boardAPI.getDetailBoard(
 		id,
 		({ data }) => {
 			board.value = data.data;
+			board.value.memberIndex = data.data.memberIndex;
 			console.log(data.message);
 			console.log(data.data);
+
+			getNickName();
+			decideEqual();
 		},
 		() => {
 			console.log('게시물 데이터 조회에 실패했습니다.');
+		},
+	);
+};
+
+const getNickName = () =>{
+	memberAPI.getNickName(
+		board.value.memberIndex,
+		({ data }) => {
+			memberNickName.value = data.data;
+		},
+		() => {
+			console.log("사용자 정보 불러오기 실패");
 		},
 	);
 };
@@ -68,6 +87,16 @@ const removeBoard = () => {
 		},
 	);
 };
+
+const decideEqual = () => {
+	var tmp = store.state.account.memberIndex;
+
+	if (tmp != 0) {
+		if (tmp == board.value.memberIndex) {
+			isEqual.value = true;
+		}
+	}
+}
 
 getDetailBoard();
 </script>
