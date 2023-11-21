@@ -56,14 +56,12 @@
 </template>
 
 <script setup>
-
 import { reactive, computed, ref } from 'vue';
 import memberAPI from '@/api/member.js';
 import { useRoute, useRouter } from 'vue-router';
-import store from '@/stores/index'
+import store from '@/stores/index';
 const route = useRoute();
 const router = useRouter();
-
 
 const goMainPage = () => router.push({ name: 'home' });
 
@@ -79,29 +77,25 @@ const onFinish = values => {
 const onFinishFailed = errorInfo => {
 	console.log('Failed:', errorInfo);
 };
-const disabled = computed(() => {
-	return !(formState.username && formState.password);
-});
 
 const login = () => {
-
-  console.log(member.value)
-  memberAPI.login(
-    member.value,
-    ({ data }) => {
-      console.log(data.message)
-      alert(data.message)
-      if (data.status == 200) {
-        sessionStorage.setItem('memberIndex', data.data.memberIndex)
-        store.commit('setAccount', data.data.memberIndex)
-        goMainPage()
-      }
-    },
-    () => {
-      console.log('로그인 실패')
-    }
-  )
-}
+	console.log(member.value);
+	memberAPI.login(
+		member.value,
+		({ data }) => {
+			console.log(data.message);
+			alert(data.message);
+			if (data.status == 200) {
+				sessionStorage.setItem('memberIndex', data.data.memberIndex);
+				store.commit('setAccount', data.data.memberIndex);
+				goMainPage();
+			}
+		},
+		() => {
+			console.log('로그인 실패');
+		},
+	);
+};
 </script>
 
 <style lang="scss" scoped>

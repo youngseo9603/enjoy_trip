@@ -35,7 +35,6 @@ import memberAPI from '@/api/member.js';
 import { ref } from 'vue';
 import store from '@/stores/index';
 
-
 const route = useRoute();
 const router = useRouter();
 const id = route.params.id;
@@ -63,14 +62,14 @@ const getDetailBoard = () => {
 	);
 };
 
-const getNickName = () =>{
+const getNickName = () => {
 	memberAPI.getNickName(
 		board.value.memberIndex,
 		({ data }) => {
 			memberNickName.value = data.data;
 		},
 		() => {
-			console.log("사용자 정보 불러오기 실패");
+			console.log('사용자 정보 불러오기 실패');
 		},
 	);
 };
@@ -96,7 +95,7 @@ const decideEqual = () => {
 			isEqual.value = true;
 		}
 	}
-}
+};
 
 getDetailBoard();
 </script>
