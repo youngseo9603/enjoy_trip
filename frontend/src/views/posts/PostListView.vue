@@ -16,7 +16,7 @@
 								placeholder="검색어를 입력해주세요."
 								v-model="searchText"
 							/>
-							<button class="btn btn-dark">검색</button>		
+							<button class="btn btn-dark">검색</button>
 						</form>
 					</div>
 				</form>
@@ -106,7 +106,7 @@ const goPage = id => {
 
 const goCreatePage = () => {
 	router.push({
-		name: 'PostCreate'
+		name: 'PostCreate',
 	});
 };
 
@@ -147,15 +147,13 @@ const searchBoards = () => {
 	);
 };
 
-
 const decideExists = () => {
 	var tmp = store.state.account.memberIndex;
 
 	if (tmp != 0) {
 		memberExist.value = true;
 	}
-}
-
+};
 
 fetchPosts();
 getBoards();

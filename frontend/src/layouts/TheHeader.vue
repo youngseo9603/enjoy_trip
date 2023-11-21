@@ -55,7 +55,7 @@
 				</li>
 			</ul>
 			<!-- 로그인했을시 -->
-			<ul v-else>
+			<ul class="flex mb-2 mb-lg-0 mx-3 space-x-4" v-else>
 				<li class="nav-item">
 					<RouterLink class="nav-link" to="/mypage"
 						>안녕하세요 {{ store.state.account.memberNickName }}님</RouterLink

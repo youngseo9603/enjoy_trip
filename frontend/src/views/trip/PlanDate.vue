@@ -5,7 +5,7 @@
 	>
 		<p class="text-white py-3" style="font-size: 30px">여행 계획하기</p>
 		<div style="width: 50%">
-			<form action="">
+			<form @submit.prevent="goplanlocation()" class="group">
 				<input
 					type="text"
 					name="planname"
@@ -30,22 +30,31 @@
 				<p class="text-white">여행날짜</p>
 
 				<a-range-picker v-model:value="value1" style="width: 100%" required />
-				<router-link to="/planlocation">
-					<button
-						type="submit"
-						class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
-					>
-						다음
-					</button>
-				</router-link>
+
+				<button
+					type="submit"
+					class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+				>
+					다음
+				</button>
 			</form>
 		</div>
 	</div>
 </template>
 
-<script>
+<script setup>
+import { useRoute, useRouter } from 'vue-router';
+import store from '@/stores/index';
+const route = useRoute();
+const router = useRouter();
 import { ref } from 'vue';
 const value1 = ref();
+
+const next = () => {
+	goplanlocation();
+};
+
+const goplanlocation = () => router.push({ name: 'planLocation' });
 </script>
 
 <style lang="scss" scoped>
