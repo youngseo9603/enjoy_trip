@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,5 +162,16 @@ public class PlanService {
         wholePlanRepository.delete(wholePlan);
     }
 
+    //need to fixed
+//    public com.example.trip.domain.PlanDay readPlanByPlanDate(Long wholePlanIndex, LocalDate date){
+//        WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
+//        List<com.example.trip.domain.PlanDay> planDays = wholePlan.getPlanDays();
+//        for(com.example.trip.domain.PlanDay planDay : planDays){
+//            if(planDay.getDate() == date){
+//                return planDay;
+//            }
+//        }
+//        return null;
+//    }
 
 }

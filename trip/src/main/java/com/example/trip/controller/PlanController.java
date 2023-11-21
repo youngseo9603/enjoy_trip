@@ -2,6 +2,7 @@ package com.example.trip.controller;
 
 import com.example.trip.controller.constant.Message;
 import com.example.trip.controller.constant.StatusCode;
+import com.example.trip.domain.PlanDay;
 import com.example.trip.domain.WholePlan;
 import com.example.trip.dto.Board.ListBoardResponse;
 import com.example.trip.dto.Plan.CreateWholePlanRequest;
@@ -18,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -61,5 +64,12 @@ public class PlanController {
         Message message = new Message(StatusCode.OK, "여행 계획 삭제 성공");
         return ResponseEntity.ok(message);
     }
+
+//    @GetMapping("/date")
+//    public ResponseEntity<?> getPlanDayByDate(@RequestParam Long memberIndex, @RequestParam Long wholePlanIndex, @RequestParam LocalDate date){
+//        PlanDay planDay = planService.readPlanByPlanDate(wholePlanIndex, date);
+//        Message message = new Message(StatusCode.OK, "여행 계획 일자 정보 조회 성공", planDay);
+//        return ResponseEntity.ok(message);
+//    }
 
 }
