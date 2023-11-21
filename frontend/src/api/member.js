@@ -11,7 +11,10 @@ const login = (LoginRequest, success, fail) => {
 
 const getNickName = (memberIndex, success, fail) =>{
     console.log("memberIndex",memberIndex);
-    memberAPI.get(`user/nickname?memberIndex=${memberIndex}`).then(success).catch(fail);
+	memberAPI
+		.get(`user/nickname?memberIndex=${memberIndex}`)
+		.then(success)
+		.catch(fail);
 }
 
 export default{signup, login, getNickName}

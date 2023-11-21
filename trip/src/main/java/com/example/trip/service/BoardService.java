@@ -43,6 +43,7 @@ public class BoardService {
 
     public void saveBoard(BoardRegisterRequest boardRegisterRequest){
         Board board = new Board();
+        board.setBoardIndex(null);
         board.setMember(memberRepository.findByMemberIndex(boardRegisterRequest.getMemberIndex()));
         board.setBoardTitle(boardRegisterRequest.getBoardTitle());
         board.setBoardContent(boardRegisterRequest.getBoardContent());

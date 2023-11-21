@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import PostListView from '@/views/posts/PostListView.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
 import PostEditView from '@/views/posts/PostEditView.vue';
+import PostCreateView from '@/views/posts/PostCreateView.vue';
 import LoginView from '@/views/user/LoginView.vue';
 import SignupView from '@/views/user/SignupView.vue';
 import MyPageView from '@/views/user/MyPageView.vue';
@@ -61,6 +62,11 @@ const router = createRouter({
 			path: '/post',
 			name: 'PostList',
 			component: PostListView,
+		},
+		{
+			path: '/postCreate',
+			name: 'PostCreate',
+			component: PostCreateView,
 		},
 		{
 			//콜론으로 동적 매핑

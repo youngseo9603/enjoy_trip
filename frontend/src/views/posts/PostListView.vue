@@ -16,7 +16,7 @@
 								placeholder="검색어를 입력해주세요."
 								v-model="searchText"
 							/>
-							<button class="btn btn-dark">검색</button>
+							<button class="btn btn-dark">검색</button>		
 						</form>
 					</div>
 				</form>
@@ -66,6 +66,7 @@
 			</button>
 		</div>
 	</div>
+	<div v-if="memberExist"><button @click="goCreatePage">등록하기</button></div>
 </template>
 
 <script setup>
@@ -73,6 +74,7 @@ import { getPosts } from '@/api/posts';
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import boardAPI from '@/api/board.js';
+import store from '@/stores/index';
 
 const router = useRouter();
 const posts = ref([]);
@@ -80,6 +82,7 @@ const currentPage = ref(1);
 const postsPerPage = 10;
 const boards = ref([]);
 var searchText = ref('');
+var memberExist = ref(false);
 
 const paginatedPosts = computed(() => {
 	const startIndex = (currentPage.value - 1) * postsPerPage;
@@ -98,6 +101,12 @@ const goPage = id => {
 	router.push({
 		name: 'PostDetail',
 		params: { id },
+	});
+};
+
+const goCreatePage = () => {
+	router.push({
+		name: 'PostCreate'
 	});
 };
 
@@ -138,8 +147,19 @@ const searchBoards = () => {
 	);
 };
 
+
+const decideExists = () => {
+	var tmp = store.state.account.memberIndex;
+
+	if (tmp != 0) {
+		memberExist.value = true;
+	}
+}
+
+
 fetchPosts();
 getBoards();
+decideExists();
 </script>
 
 <style>

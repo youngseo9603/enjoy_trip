@@ -33,7 +33,6 @@ import { useRoute, useRouter } from 'vue-router';
 import boardAPI from '@/api/board.js';
 import memberAPI from '@/api/member.js';
 import { ref } from 'vue';
-import member from '../../api/member';
 import store from '@/stores/index';
 
 
@@ -51,23 +50,29 @@ const getDetailBoard = () => {
 		id,
 		({ data }) => {
 			board.value = data.data;
+			board.value.memberIndex = data.data.memberIndex;
 			console.log(data.message);
 			console.log(data.data);
+
+			getNickName();
+			decideEqual();
 		},
 		() => {
 			console.log('게시물 데이터 조회에 실패했습니다.');
 		},
 	);
+};
 
+const getNickName = () =>{
 	memberAPI.getNickName(
-		id,
+		board.value.memberIndex,
 		({ data }) => {
 			memberNickName.value = data.data;
 		},
 		() => {
-			console.log("사용자 정보 불러오기 실패")
-		}
-	)
+			console.log("사용자 정보 불러오기 실패");
+		},
+	);
 };
 
 const removeBoard = () => {
@@ -86,17 +91,14 @@ const removeBoard = () => {
 const decideEqual = () => {
 	var tmp = store.state.account.memberIndex;
 
-	console.log(tmp);
-	console.log(id);
 	if (tmp != 0) {
-		if (tmp == id) {
+		if (tmp == board.value.memberIndex) {
 			isEqual.value = true;
 		}
 	}
 }
 
 getDetailBoard();
-decideEqual();
 </script>
 
 <style lang="scss" scoped></style>

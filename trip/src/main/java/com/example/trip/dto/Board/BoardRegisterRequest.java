@@ -11,5 +11,4 @@ public class BoardRegisterRequest {
     Long memberIndex;
     String boardTitle;
     String boardContent;
-    LocalDateTime createTime;
 }

@@ -66,21 +66,19 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerBoard(Long memberIndex, String boardTitle, String boardContent){
+    public ResponseEntity<?> registerBoard(@RequestBody BoardRegisterRequest boardRegisterRequest){
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
         Message message;
 
-        BoardRegisterRequest request = new BoardRegisterRequest(memberIndex,boardTitle, boardContent, LocalDateTime.now());
-
-        Member member = memberService.findMemberByIndex(memberIndex);
-        if(member == null){
-            message = new Message(400,"해당 멤버 없음");
-        }
-        else{
-            boardService.saveBoard(request);
+//        Member member = memberService.findMemberByIndex(memberIndex);
+//        if(member == null){
+//            message = new Message(400,"해당 멤버 없음");
+//        }
+//        else{
+            boardService.saveBoard(boardRegisterRequest);
             message = new Message(200, "보드 등록 성공");
-        }
+//        }
 
         return new ResponseEntity<>(message, header, HttpStatus.OK);
     }
