@@ -1,6 +1,7 @@
 package com.example.trip.dto.Plan;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Time;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class PlanDay {
 
     private Long playDayIndex;

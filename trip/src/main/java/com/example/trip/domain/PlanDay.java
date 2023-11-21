@@ -1,5 +1,6 @@
 package com.example.trip.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
@@ -28,7 +29,8 @@ public class PlanDay {
     @Column(name = "Date")
     private LocalDate Date;
 
-    @OneToMany(mappedBy = "planDay")
+    @JsonIgnore
+    @OneToMany(mappedBy = "planDay", fetch = FetchType.EAGER)
     private List<Plan> plan;
 
     @ManyToOne

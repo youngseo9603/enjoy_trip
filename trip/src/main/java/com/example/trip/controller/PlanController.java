@@ -5,6 +5,7 @@ import com.example.trip.controller.constant.StatusCode;
 import com.example.trip.domain.WholePlan;
 import com.example.trip.dto.Board.ListBoardResponse;
 import com.example.trip.dto.Plan.CreateWholePlanRequest;
+import com.example.trip.dto.Plan.PlanInfo;
 import com.example.trip.dto.Plan.PlanListResponse;
 import com.example.trip.repository.WholePlanRepository;
 import com.example.trip.service.MemberService;
@@ -27,15 +28,15 @@ public class PlanController {
     private final PlanService planService;
 
     @GetMapping("/list")
-    public ResponseEntity<?> getPlanList(@RequestBody Long memberIndex){
-        List<WholePlan> wholePlans = planService.findPlanListByMemberIndex(memberIndex);
-        Message message = new Message(StatusCode.OK, "내 여행 목록 조회 성공", wholePlans);
+    public ResponseEntity<?> getPlanList(@RequestParam Long memberIndex){
+        List<PlanInfo> planInfos = planService.findPlanListByMemberIndex(memberIndex);
+        Message message = new Message(StatusCode.OK, "내 여행 목록 조회 성공", planInfos);
         return ResponseEntity.ok(message);
     }
 
-    @GetMapping("/{wholePlanIndex}")
-    public ResponseEntity<?> getWholePlan(@RequestHeader("wholePlanIndex") Long wholePlanIndex,@RequestBody Long memberIndex){
-        WholePlan wholePlan = planService.findWholePlanByWholePlanIndex(wholePlanIndex);
+    @GetMapping()
+    public ResponseEntity<?> getWholePlan(@RequestParam Long wholePlanIndex){
+        CreateWholePlanRequest wholePlan = planService.findWholePlanByWholePlanIndex(wholePlanIndex);
         Message message = new Message(StatusCode.OK, "내 여행 목록 조회 성공", wholePlan);
         return ResponseEntity.ok(message);
     }
@@ -43,7 +44,7 @@ public class PlanController {
     @PostMapping()
     public ResponseEntity<?> createWholePlan(@RequestHeader("memberIndex") Long memberIndex, @RequestBody CreateWholePlanRequest createWholePlanRequest){
         planService.createWholePlan(createWholePlanRequest, memberIndex);
-        Message message = new Message();
+        Message message = new Message(StatusCode.OK, "여행 계획 등록 성공");
         return ResponseEntity.ok(message);
     }
 

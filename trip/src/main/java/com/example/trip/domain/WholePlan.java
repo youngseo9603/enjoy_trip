@@ -1,5 +1,6 @@
 package com.example.trip.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
@@ -35,7 +36,8 @@ public class WholePlan {
     @Column(name = "Title")
     private String title;
 
-    @OneToMany(mappedBy = "wholePlan")
+    @JsonIgnore
+    @OneToMany(mappedBy = "wholePlan", fetch = FetchType.EAGER)
     private List<PlanDay> planDays;
 
     @ManyToOne

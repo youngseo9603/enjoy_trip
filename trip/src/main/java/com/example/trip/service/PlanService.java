@@ -6,6 +6,7 @@ import com.example.trip.domain.WholePlan;
 import com.example.trip.dto.Plan.CreateWholePlanRequest;
 import com.example.trip.dto.Plan.Plan;
 import com.example.trip.dto.Plan.PlanDay;
+import com.example.trip.dto.Plan.PlanInfo;
 import com.example.trip.repository.MemberRepository;
 import com.example.trip.repository.PlanDayRepository;
 import com.example.trip.repository.PlanRepository;
@@ -29,14 +30,54 @@ public class PlanService {
 
 
     //사용자 plan list 출력
-    public List<WholePlan> findPlanListByMemberIndex(Long memberIndex){
-        List<WholePlan> list = wholePlanRepository.findAllByMember_MemberIndex(memberIndex);
-        return list;
+    public List<PlanInfo> findPlanListByMemberIndex(Long memberIndex){
+        Member member = memberRepository.findByMemberIndex(memberIndex);
+        List<WholePlan> list = wholePlanRepository.findAllByMember(member);
+        List<PlanInfo> response = new ArrayList<>();
+        for(WholePlan wholePlan: list){
+            PlanInfo planInfo = PlanInfo.builder()
+                    .wholePlanIndex(wholePlan.getWholePlanIndex())
+                    .title(wholePlan.getTitle())
+                    .startTime(wholePlan.getStartDate())
+                    .endTime(wholePlan.getEndDate())
+                    .build();
+            response.add(planInfo);
+        }
+        return response;
     }
 
-    public WholePlan findWholePlanByWholePlanIndex(Long wholePlanIndex){
+    public CreateWholePlanRequest findWholePlanByWholePlanIndex(Long wholePlanIndex){
         WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
-        return wholePlan;
+        List<PlanDay> planDays = new ArrayList<>();
+
+        for(com.example.trip.domain.PlanDay planDay : wholePlan.getPlanDays()){
+            List<Plan> plans = new ArrayList<>() ;
+            for(com.example.trip.domain.Plan plan : planDay.getPlan()){
+                Plan p = Plan.builder()
+                        .planIndex(plan.getPlanIndex())
+                        .placeName(plan.getPlaceName())
+                        .category(plan.getCategory())
+                        .orders(plan.getOrders())
+                        .address(plan.getAddress())
+                        .build();
+                plans.add(p);
+            }
+            PlanDay pd = PlanDay.builder()
+                    .date(planDay.getDate())
+                    .playDayIndex(planDay.getPlanDayIndex())
+                    .plans(plans)
+                    .build();
+            planDays.add(pd);
+        }
+
+        CreateWholePlanRequest response = CreateWholePlanRequest.builder()
+                .title(wholePlan.getTitle())
+                .startDate(wholePlan.getStartDate())
+                .endDate(wholePlan.getEndDate())
+                .planDays(planDays)
+                .build();
+
+        return response;
     }
 
     public void createWholePlan(CreateWholePlanRequest request, Long memberIndex){
@@ -62,7 +103,7 @@ public class PlanService {
                         .address(plan.getAddress())
                         .placeName(plan.getPlaceName())
                         .category(plan.getCategory())
-                        .orders(plan.getOrder())
+                        .orders(plan.getOrders())
                         .planDay(pd)
                         .build();
                 planRepository.save(p);
