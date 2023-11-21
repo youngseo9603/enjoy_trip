@@ -11,6 +11,10 @@ import PlanDateView from '@/views/trip/PlanDate.vue';
 import PlanLocationView from '@/views/trip/PlanLocation.vue';
 import PlanTripView from '@/views/trip/PlanTrip.vue';
 import PlanMapPathView from '@/views/trip/PlanMapPath.vue';
+import InfoView from '@/views/user/mypage/Info.vue';
+import MycommentView from '@/views/user/mypage/MyComment.vue';
+import MypostView from '@/views/user/mypage/MyPost.vue';
+import MytripView from '@/views/user/mypage/MyTrip.vue';
 
 // import PlanMapSearchView from '@/views/trip/PlanMapSearch.vue';
 const router = createRouter({
@@ -30,6 +34,28 @@ const router = createRouter({
 			path: '/mypage',
 			name: 'mypage',
 			component: MyPageView,
+			children: [
+				{
+					path: '',
+					name: 'info',
+					component: InfoView,
+				},
+				{
+					path: 'mypost',
+					name: 'mypost',
+					component: MypostView,
+				},
+				{
+					path: 'mycomment',
+					name: 'mycomment',
+					component: MycommentView,
+				},
+				{
+					path: 'mytrip',
+					name: 'mytrip',
+					component: MytripView,
+				},
+			],
 		},
 		{
 			path: '/post',
