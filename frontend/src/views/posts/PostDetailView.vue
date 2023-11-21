@@ -33,6 +33,7 @@ import { useRoute, useRouter } from 'vue-router';
 import boardAPI from '@/api/board.js';
 import memberAPI from '@/api/member.js';
 import { ref } from 'vue';
+import member from '../../api/member';
 
 const route = useRoute();
 const router = useRouter();
@@ -54,6 +55,16 @@ const getDetailBoard = () => {
 			console.log('게시물 데이터 조회에 실패했습니다.');
 		},
 	);
+
+	memberAPI.getNickName(
+		id,
+		({ data }) => {
+			memberNickName.value = data.data;
+		},
+		() => {
+			console.log("사용자 정보 불러오기 실패")
+		}
+	)
 };
 
 const removeBoard = () => {

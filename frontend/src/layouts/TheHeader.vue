@@ -57,7 +57,7 @@
 			<!-- 로그인했을시 -->
 			<div v-else>
 				<RouterLink class="nav-link" to="/mypage"
-					>안녕하세요 좌소연님</RouterLink
+					>안녕하세요 {{ store.state.account.memberNickName }}님</RouterLink
 				>
 			</div>
 		</nav>
@@ -67,11 +67,15 @@
 <script setup>
 import { ref } from 'vue';
 import store from '@/stores/index';
+import memberAPI from '@/api/member.js';
+
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
 	isMenuOpen.value = !isMenuOpen.value;
 };
+
+
 
 
 </script>
