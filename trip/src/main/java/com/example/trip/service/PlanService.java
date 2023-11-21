@@ -112,5 +112,53 @@ public class PlanService {
 
     }
 
+    @Transactional
+    public void updateWholePlan(Long memberindex, Long wholePlanIndex, CreateWholePlanRequest createWholePlanRequest){
+        WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
+
+        for(com.example.trip.domain.PlanDay planDay : wholePlan.getPlanDays()){
+            for(com.example.trip.domain.Plan plan : planDay.getPlan()){
+                planRepository.delete(plan);
+            }
+            planDayRepository.delete(planDay);
+        }
+
+        wholePlan.setTitle(createWholePlanRequest.getTitle());
+        wholePlan.setEndDate(createWholePlanRequest.getEndDate());
+        wholePlan.setStartDate(createWholePlanRequest.getStartDate());
+
+        for(PlanDay planDay : createWholePlanRequest.getPlanDays()){
+            com.example.trip.domain.PlanDay pd = com.example.trip.domain.PlanDay.builder()
+                    .Date(planDay.getDate())
+                    .wholePlan(wholePlan)
+                    .build();
+            planDayRepository.save(pd);
+            for(Plan plan : planDay.getPlans()){
+                com.example.trip.domain.Plan p = com.example.trip.domain.Plan.builder()
+                        .address(plan.getAddress())
+                        .placeName(plan.getPlaceName())
+                        .category(plan.getCategory())
+                        .orders(plan.getOrders())
+                        .planDay(pd)
+                        .build();
+                planRepository.save(p);
+            }
+        }
+
+        wholePlanRepository.save(wholePlan);
+    }
+
+    @Transactional
+    public void removeWholePlan(Long wholePlanIndex){
+        WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
+        for(com.example.trip.domain.PlanDay planDay : wholePlan.getPlanDays()){
+            for(com.example.trip.domain.Plan plan : planDay.getPlan()){
+                planRepository.delete(plan);
+            }
+            planDayRepository.delete(planDay);
+        }
+        wholePlanRepository.delete(wholePlan);
+    }
+
 
 }

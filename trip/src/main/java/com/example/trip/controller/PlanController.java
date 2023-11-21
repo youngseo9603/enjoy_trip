@@ -42,11 +42,24 @@ public class PlanController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createWholePlan(@RequestHeader("memberIndex") Long memberIndex, @RequestBody CreateWholePlanRequest createWholePlanRequest){
+    public ResponseEntity<?> createWholePlan(@RequestParam Long memberIndex, @RequestBody CreateWholePlanRequest createWholePlanRequest){
         planService.createWholePlan(createWholePlanRequest, memberIndex);
         Message message = new Message(StatusCode.OK, "여행 계획 등록 성공");
         return ResponseEntity.ok(message);
     }
 
+    @PutMapping()
+    public ResponseEntity<?> modifyWholePlan(@RequestParam Long memberIndex, @RequestParam Long wholePlanIndex, @RequestBody CreateWholePlanRequest createWholePlanRequest){
+        planService.updateWholePlan(memberIndex, wholePlanIndex, createWholePlanRequest);
+        Message message = new Message(StatusCode.OK, "여행 계획 수정 성공");
+        return ResponseEntity.ok(message);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteWholePlan(@RequestParam Long memberIndex, @RequestParam Long wholePlanIndex){
+        planService.removeWholePlan(wholePlanIndex);
+        Message message = new Message(StatusCode.OK, "여행 계획 삭제 성공");
+        return ResponseEntity.ok(message);
+    }
 
 }

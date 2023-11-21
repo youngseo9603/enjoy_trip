@@ -12,4 +12,6 @@ public interface WholePlanRepository extends JpaRepository<WholePlan, Long> {
     List<WholePlan> findAllByMember(Member member);
     WholePlan findByMember(Member member);
 
+    void deleteAllByWholePlanIndex(Long wholePlanIndex);
+
 }
