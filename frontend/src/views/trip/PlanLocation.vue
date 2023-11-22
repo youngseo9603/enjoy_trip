@@ -43,6 +43,8 @@
 
 <script>
 import { toRaw, ref } from 'vue';
+import wishAPI from '@/api/wish';
+import store from '@/stores/index';
 export default {
 	name: 'KakaoMap',
 	data() {
@@ -133,7 +135,6 @@ export default {
 		},
 		makeClickListener(map, marker, data, infowindow) {
 			return function () {
-				console.log(data);
 				const content = document.createElement('div');
 				content.classList.add('custom');
 
@@ -149,7 +150,29 @@ export default {
 
 				const selectwish = document.createElement('button');
 				selectwish.innerText = '담기';
-				selectwish.onclick = gowish;
+				selectwish.addEventListener('click', () => {
+					//위시 리스트에 담기
+					var wish = ref({});
+					var address = ref({});
+					address.value.addr1 = data.address_name;
+					address.value.addr2 = data.road_address_name;
+					address.value.longtitude = [data.x, data.y];
+
+					wish.value.address = address;
+					wish.value.placeName = data.place_name;
+					wish.value.category = data.category_group_name;
+					wish.value.memberIndex = store.state.account.memberIndex;
+
+					wishAPI.addWish(
+						wish.value,
+						({data})=>{
+							alert("성공적으로 위시리스트에 담았습니다.");
+							console.log(data.message);
+						}),
+						() =>{
+							console.log("위시리스트 담기 실패");
+						}
+				});
 
 				content.appendChild(placeName);
 				content.appendChild(address);
@@ -212,10 +235,6 @@ export default {
 	},
 };
 
-function gowish() {
-	console.log('담았당께');
-	// 담았응께 디비에 넣어주이소
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

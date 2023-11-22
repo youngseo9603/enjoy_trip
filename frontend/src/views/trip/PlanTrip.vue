@@ -31,7 +31,7 @@
 				>
 					<template #item="{ element }">
 						<div class="list-group-item">
-							{{ element.place_name }}
+							{{ element.placeName }}
 						</div>
 					</template>
 				</draggable>
@@ -54,12 +54,22 @@
 </template>
 
 <script>
-import { getWishlist } from '../../api/wishlist';
+import wishAPI from '@/api/wish';
 import { toRaw, ref } from 'vue';
+import store from '@/stores/index';
 const wishs = ref([]);
 const days = 5;
 const fetchWishs = () => {
-	wishs.value = getWishlist();
+	wishAPI.getWishList(
+		store.state.account.memberIndex,
+		({data})=>{
+			wishs.value = data.data;
+			console.log(data.message);
+		},
+		() =>{
+			console.log("위시리스트 불러오기 실패");
+		}
+	)
 };
 fetchWishs();
 
