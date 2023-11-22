@@ -1,3 +1,4 @@
 ## database ERD
-<img width="920" alt="스크린샷 2023-11-21 오후 7 09 53" src="https://github.com/youngseo9603/food_trip/assets/81522548/d77e6b40-b24b-4d87-95c7-b53949a72ac3">
+
+![스크린샷 2023-11-22 오후 2 53 10](https://github.com/youngseo9603/food_trip/assets/81522548/615904dd-37de-47a6-a8c8-7f85085a4850)
 
