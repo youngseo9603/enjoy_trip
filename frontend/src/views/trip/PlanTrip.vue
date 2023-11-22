@@ -23,7 +23,7 @@
 							itemKey="name"
 						>
 							<template #item="{ element }">
-								<div class="list-group-item">{{ element.place_name }}</div>
+								<div class="list-group-item">{{ element.placeName }}</div>
 							</template>
 						</draggable>
 					</router-link>
@@ -66,22 +66,9 @@
 import wishAPI from '@/api/wish';
 import { toRaw, ref } from 'vue';
 import store from '@/stores/index';
-const wishs = ref([]);
-const fetchWishs = () => {
-	wishAPI.getWishList(
-		store.state.account.memberIndex,
-		({data})=>{
-			wishs.value = data.data;
-			console.log(data.message);
-		},
-		() =>{
-			console.log("위시리스트 불러오기 실패");
-		}
-	)
-};
-fetchWishs();
-
 import draggable from 'vuedraggable';
+const wishs = ref([]);
+
 export default {
 	name: 'travel-lists',
 	display: 'travel Lists',
@@ -119,6 +106,18 @@ export default {
 		setIndex: function (index) {
 			this.selectedIndex = index; // Set the selected index
 		},
+	},
+	mounted() {
+		wishAPI.getWishList(
+			store.state.account.memberIndex,
+			({ data }) => {
+				wishs.value = data.data;
+				console.log(data.message);
+			},
+			() => {
+				console.log("위시리스트 불러오기 실패");
+			}
+		);
 	},
 };
 </script>
