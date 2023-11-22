@@ -4,29 +4,27 @@ const store = createStore({
 	state() {
 		return {
 			plan: {
-				planTitle : '',
-				
+				planTitle: '',
 			},
 		};
 	},
 	mutations: {
 		// setAccount(state, memberIndex) {
 		// 	state.account.memberIndex = memberIndex;
-
-        //     memberAPI.getNickName(
-        //         	memberIndex,
-        //         	({ data }) => {
-        //         		 state.account.memberNickName =  data.data;
-        //         	},
-        //         	() => {
-        //         		console.log("nickname 불러오기 실패");
-        //         	},
-        //         );
+		//     memberAPI.getNickName(
+		//         	memberIndex,
+		//         	({ data }) => {
+		//         		 state.account.memberNickName =  data.data;
+		//         	},
+		//         	() => {
+		//         		console.log("nickname 불러오기 실패");
+		//         	},
+		//         );
 		// },
-        // deleteAccount(state){
-        //     state.account.memberIndex = 0;
-        //     state.account.memberNickName = '';
-        // }
+		// deleteAccount(state){
+		//     state.account.memberIndex = 0;
+		//     state.account.memberNickName = '';
+		// }
 	},
 });
 

@@ -1,5 +1,5 @@
 <template>
-	<div>내 댓글 목록</div>
+	<div>내 위시리스트</div>
 </template>
 
 <script setup></script>

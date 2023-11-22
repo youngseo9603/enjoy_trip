@@ -10,7 +10,7 @@
 			<br />
 			<br />
 			<ul>
-				<router-link to="/mypage/" 
+				<router-link to="/mypage/"
 					><li>
 						<img src="@/assets/icon/info.svg" alt="SVG Icon" />내 정보
 					</li></router-link
@@ -18,6 +18,12 @@
 				<router-link to="/mypage/mytrip"
 					><li>
 						<img src="@/assets/icon/earth.svg" alt="SVG Icon" />내 여행계획
+					</li></router-link
+				>
+				<router-link to="/mypage/mycomment"
+					><li>
+						<img src="@/assets/icon/comment.svg" alt="SVG Icon" />내가
+						위시리스트
 					</li></router-link
 				>
 				<router-link to="/mypage/mypost"
@@ -38,7 +44,7 @@ import { ref } from 'vue';
 
 var member = ref({});
 
-const startMyPage = () =>{
+const startMyPage = () => {
 	memberAPI.getMyInfo(
 		store.state.account.memberIndex,
 		({ data }) => {
@@ -48,9 +54,7 @@ const startMyPage = () =>{
 			console.log('마이 데이터 정보 불러오기 실패');
 		},
 	);
-}
-
-
+};
 
 startMyPage();
 </script>

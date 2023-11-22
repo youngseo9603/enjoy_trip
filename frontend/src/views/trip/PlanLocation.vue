@@ -1,34 +1,44 @@
 <template>
-	<div class="flex col-span-7" style="position: static; margin-top: 2rem">
-		<div class="col-span-2">
-			<form @submit.prevent="searchLoc()">
-				<input v-model="searchText" placeholder="검색어를 입력하세요." />
-				<button>검색</button>
-			</form>
-			<div id="map"></div>
-		</div>
+	<div class="flex flex-col back items-center">
+		<div class="flex col-span-7" style="position: static; margin-top: 2rem">
+			<div class="col-span-2">
+				<form @submit.prevent="searchLoc()">
+					<input v-model="searchText" placeholder="검색어를 입력하세요." />
+					<button>검색</button>
+				</form>
+				<div id="map"></div>
+			</div>
 
-		<div class="col-span-4">
-			<table id="list">
-				<thead>
-					<th style="width: 50px">번호</th>
-					<th style="width: 170px">장소</th>
-					<th style="width: 200px">주소</th>
-					<th style="width: 200px">번호</th>
-					<th style="width: 120px">카테고리</th>
-				</thead>
-				<tbody></tbody>
-			</table>
+			<div class="col-span-4">
+				<table id="list">
+					<thead>
+						<th style="width: 50px">번호</th>
+						<th style="width: 170px">장소</th>
+						<th style="width: 200px">주소</th>
+						<th style="width: 200px">번호</th>
+						<th style="width: 120px">카테고리</th>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
 		</div>
+		<router-link to="/plan">
+			<button
+				type="submit"
+				class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+			>
+				이전
+			</button>
+		</router-link>
+		<router-link to="/plan/wholeplan">
+			<button
+				type="submit"
+				class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+			>
+				계획하기
+			</button>
+		</router-link>
 	</div>
-	<router-link to="/plan">
-		<button
-			type="submit"
-			class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
-		>
-			계획하기
-		</button>
-	</router-link>
 </template>
 
 <script>
@@ -139,6 +149,7 @@ export default {
 
 				const selectwish = document.createElement('button');
 				selectwish.innerText = '담기';
+				selectwish.onclick = gowish;
 
 				content.appendChild(placeName);
 				content.appendChild(address);
@@ -200,10 +211,19 @@ export default {
 		},
 	},
 };
+
+function gowish() {
+	console.log('담았당께');
+	// 담았응께 디비에 넣어주이소
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.back {
+	width: 100%;
+	height: 600px;
+}
 #map {
 	width: 600px;
 	height: 400px;

@@ -8,6 +8,7 @@ import LoginView from '@/views/user/LoginView.vue';
 import SignupView from '@/views/user/SignupView.vue';
 import MyPageView from '@/views/user/MyPageView.vue';
 import SearchLocView from '@/views/trip/SearchLoc.vue';
+import PlanView from '@/views/Plan.vue';
 import PlanDateView from '@/views/trip/PlanDate.vue';
 import PlanLocationView from '@/views/trip/PlanLocation.vue';
 import PlanTripView from '@/views/trip/PlanTrip.vue';
@@ -88,23 +89,38 @@ const router = createRouter({
 		{
 			path: '/plan',
 			name: 'plan',
-			component: PlanTripView,
+			component: PlanView,
+			children: [
+				{
+					path: 'wholeplan',
+					name: 'wholeplan',
+					component: PlanTripView,
+				},
+				{
+					path: '',
+					name: 'planDate',
+					component: PlanDateView,
+					meta: {
+						next: 'planlocation',
+					},
+				},
+				{
+					path: 'planlocation',
+					name: 'planLocation',
+					component: PlanLocationView,
+					meta: {
+						next: 'wholeplan',
+						prev: 'planDate',
+					},
+				},
+				{
+					path: 'path/:id',
+					name: 'path',
+					component: PlanMapPathView,
+				},
+			],
 		},
-		{
-			path: '/plandate',
-			name: 'planDate',
-			component: PlanDateView,
-		},
-		{
-			path: '/planlocation',
-			name: 'planLocation',
-			component: PlanLocationView,
-		},
-		{
-			path: '/path',
-			name: 'path',
-			component: PlanMapPathView,
-		},
+
 		{
 			path: '/login',
 			name: 'login',
