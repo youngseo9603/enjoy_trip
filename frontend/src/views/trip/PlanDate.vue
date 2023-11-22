@@ -13,7 +13,7 @@
 							class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
 							pattern=".{1,}"
 							placeholder="여행이름"
-							value="스토어에 저장된 여행이름"
+							v-model.lazy="wholePlan.title"
 							required
 						/>
 						<br />
@@ -25,7 +25,7 @@
 							style="background-color: white"
 							pattern=".{1,}"
 							placeholder="숙소주소"
-							value="스토어에 저장된 주소"
+							v-model.lazy="wholePlan.accommodation"
 							required
 						/>
 
@@ -62,7 +62,7 @@ const router = useRouter();
 import dayjs from 'dayjs';
 import { ref } from 'vue';
 const dateFormat = 'YYYY/MM/DD';
-
+var wholePlan=ref({});
 //stores에 입력받고 그값을 반환
 const datevalue = ref([
 	dayjs('2023/10/11', dateFormat),
@@ -73,7 +73,27 @@ const next = () => {
 	// goplanlocation();
 };
 
-const gonext = () => router.push({ name: 'planLocation' });
+const gonext = () => {
+	store.commit('setPlanTitle',wholePlan.value.title);
+	store.commit('setAccomodation',wholePlan.value.accommodation);
+
+	var startDate = {
+		day: datevalue.value[0].$D,
+		month: datevalue.value[0].$M,
+		year: datevalue.value[0].$y,
+	};
+
+	var endDate = {
+		day: datevalue.value[1].$D,
+		month: datevalue.value[1].$M,
+		year: datevalue.value[1].$y,
+	};
+
+	store.commit('setStartDate', startDate);
+	store.commit('setEndDate', endDate);
+
+	router.push({ name: 'planLocation' });
+}
 </script>
 
 <style lang="scss" scoped>

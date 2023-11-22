@@ -46,5 +46,7 @@ public class Member {
     @Column(name = "email")
     private String email;
 
-
+    @OneToOne
+    @JoinColumn(name = "memberIndex")
+    private Wish wish;
 }
