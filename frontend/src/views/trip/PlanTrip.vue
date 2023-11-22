@@ -29,22 +29,26 @@
 					</router-link>
 				</div>
 			</template>
-		</div>
-		<div class="col-span-1">
-			<h3>즐겨찾기한 여행지</h3>
-			<draggable
-				class="list-group"
-				:list="wishlist"
-				group="people"
-				@change="log"
-				itemKey="name"
-			>
-				<template #item="{ element }">
-					<div class="list-group-item">
-						{{ element.place_name }}
-					</div>
-				</template>
-			</draggable>
+			<div class="col-3">
+				<h3>즐겨찾기한 여행지</h3>
+				<draggable
+					class="list-group"
+					:list="wishlist"
+					group="people"
+					@change="log"
+					itemKey="name"
+				>
+					<template #item="{ element }">
+						<div class="list-group-item">
+							{{ element.placeName }}
+						</div>
+					</template>
+				</draggable>
+			</div>
+
+			<div class="col-3">
+				<RouterView></RouterView>
+			</div>
 		</div>
 
 		<router-link to="/plan">
@@ -59,11 +63,21 @@
 </template>
 
 <script>
-import { getWishlist } from '../../api/wishlist';
+import wishAPI from '@/api/wish';
 import { toRaw, ref } from 'vue';
+import store from '@/stores/index';
 const wishs = ref([]);
 const fetchWishs = () => {
-	wishs.value = getWishlist();
+	wishAPI.getWishList(
+		store.state.account.memberIndex,
+		({data})=>{
+			wishs.value = data.data;
+			console.log(data.message);
+		},
+		() =>{
+			console.log("위시리스트 불러오기 실패");
+		}
+	)
 };
 fetchWishs();
 

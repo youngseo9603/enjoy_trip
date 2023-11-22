@@ -46,5 +46,6 @@ public class Member {
     @Column(name = "email")
     private String email;
 
-
+    @OneToMany(mappedBy = "member")
+    private List<Wish> wish;
 }
