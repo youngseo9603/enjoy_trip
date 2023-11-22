@@ -2,16 +2,14 @@ package com.example.trip.controller;
 
 import com.example.trip.controller.constant.Message;
 import com.example.trip.controller.constant.StatusCode;
-import com.example.trip.domain.PlanDay;
 import com.example.trip.domain.WholePlan;
 import com.example.trip.dto.Board.ListBoardResponse;
-import com.example.trip.dto.Plan.CreateWholePlanRequest;
-import com.example.trip.dto.Plan.PlanInfo;
-import com.example.trip.dto.Plan.PlanListResponse;
+import com.example.trip.dto.Plan.*;
 import com.example.trip.repository.WholePlanRepository;
 import com.example.trip.service.MemberService;
 import com.example.trip.service.PlanService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,11 +63,18 @@ public class PlanController {
         return ResponseEntity.ok(message);
     }
 
-//    @GetMapping("/date")
-//    public ResponseEntity<?> getPlanDayByDate(@RequestParam Long memberIndex, @RequestParam Long wholePlanIndex, @RequestParam LocalDate date){
-//        PlanDay planDay = planService.readPlanByPlanDate(wholePlanIndex, date);
-//        Message message = new Message(StatusCode.OK, "여행 계획 일자 정보 조회 성공", planDay);
-//        return ResponseEntity.ok(message);
-//    }
+    @GetMapping("/date")
+    public ResponseEntity<?> getPlanDayByPlanDayIndex(@RequestParam Long wholePlanIndex, @RequestParam Long planDayIndex){
+        PlanDay planDay = planService.readPlanByPlanDate(wholePlanIndex, planDayIndex);
+        Message message = new Message(StatusCode.OK, "여행 계획 날짜별 조회 성공", planDay);
+        return ResponseEntity.ok(message);
+    }
+
+    @PutMapping("/date")
+    public ResponseEntity<?> modifyPlanDayByPlanDayIndex(@RequestParam Long wholePlanIndex, @RequestParam Long planDayIndex, @RequestBody PlanDay planDay){
+        planService.updatePlanDay(wholePlanIndex, planDay);
+        Message message = new Message(StatusCode.OK, "여행 계획 날짜별 수정 성공");
+        return ResponseEntity.ok(message);
+    }
 
 }

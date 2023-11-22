@@ -163,15 +163,62 @@ public class PlanService {
     }
 
     //need to fixed
-//    public com.example.trip.domain.PlanDay readPlanByPlanDate(Long wholePlanIndex, LocalDate date){
-//        WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
-//        List<com.example.trip.domain.PlanDay> planDays = wholePlan.getPlanDays();
-//        for(com.example.trip.domain.PlanDay planDay : planDays){
-//            if(planDay.getDate() == date){
-//                return planDay;
-//            }
+    public PlanDay readPlanByPlanDate(Long wholePlanIndex, Long planDayIndex){
+        WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
+
+        PlanDay pd = new PlanDay();
+
+        for(com.example.trip.domain.PlanDay planDay : wholePlan.getPlanDays()){
+            if(planDay.getPlanDayIndex() == planDayIndex) {
+                pd = PlanDay.builder()
+                        .date(planDay.getDate())
+                        .playDayIndex(planDayIndex)
+                        .plans(new ArrayList<>())
+                        .build();
+
+                for(com.example.trip.domain.Plan plan : planDay.getPlan()){
+                    Plan p = Plan.builder()
+                            .planIndex(plan.getPlanIndex())
+                            .address(plan.getAddress())
+                            .placeName(plan.getPlaceName())
+                            .category(plan.getCategory())
+                            .orders(plan.getOrders())
+                            .build();
+                    pd.getPlans().add(p);
+                }
+            }
+        }
+        return pd;
+    }
+
+    @Transactional
+    public void updatePlanDay(Long wholePlanIndex, PlanDay planDaydto){
+        com.example.trip.domain.PlanDay planDay = planDayRepository.findByPlanDayIndex(planDaydto.getPlayDayIndex());
+
+        for(com.example.trip.domain.Plan plan : planDay.getPlan()){
+            planRepository.delete(plan);
+        }
+        planDayRepository.delete(planDay);
+
+//        com.example.trip.domain.PlanDay pd = com.example.trip.domain.PlanDay.builder()
+//                .wholePlan(wholePlanRepository.findByWholePlanIndex(wholePlanIndex))
+//                .planDayIndex(planDaydto.getPlayDayIndex())
+//                .Date(planDaydto.getDate())
+//                .build();
+//        planDayRepository.save(pd);
+//
+//        for(Plan plan : planDaydto.getPlans()){
+//            com.example.trip.domain.Plan p = com.example.trip.domain.Plan.builder()
+//                    .planIndex(plan.getPlanIndex())
+//                    .address(plan.getAddress())
+//                    .placeName(plan.getPlaceName())
+//                    .category(plan.getCategory())
+//                    .orders(plan.getOrders())
+//                    .planDay(pd)
+//                    .build();
+//            planRepository.save(p);
 //        }
-//        return null;
-//    }
+
+    }
 
 }

@@ -11,6 +11,7 @@ public interface PlanDayRepository extends JpaRepository<PlanDay, Long> {
 
     List<PlanDay> findAllByWholePlan(WholePlan wholePlan);
     void deleteAllByWholePlan(WholePlan wholePlan);
+    PlanDay findByPlanDayIndex(Long planDayIndex);
 
 
 }
