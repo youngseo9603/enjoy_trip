@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col back items-center">
+	<div class="back items-center">
 		<router-view v-slot="{ Component }"
 			><transition name="slide" mode="out-in"
 				><component :is="Component"></component> </transition

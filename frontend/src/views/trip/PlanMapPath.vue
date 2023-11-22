@@ -1,10 +1,74 @@
 <template>
+	<div class="grid grid-cols-4 gap-4 back items-center">
+		<div
+			class="col-span-3"
+			style="white-space: nowrap; overflow-x: auto; overflow-y: hidden"
+		>
+			<template v-for="(day, index) in days" :key="day.place_name">
+				<div
+					style="
+						width: 200px;
+						height: 200px;
+						display: inline-block;
+						margin-right: 10px;
+					"
+				>
+					<router-link :to="{ path: '/plan/' + (index + 1) }">
+						<h3>{{ index + 1 }}일째 여행지</h3>
+						<draggable
+							class="list-group"
+							:list="getList(index)"
+							group="people"
+							@change="log"
+							itemKey="name"
+						>
+							<template #item="{ element }">
+								<div class="list-group-item">{{ element.place_name }}</div>
+							</template>
+						</draggable>
+					</router-link>
+				</div>
+			</template>
+		</div>
+		<div class="col-span-1">
+			<h3>즐겨찾기한 여행지</h3>
+			<draggable
+				class="list-group"
+				:list="wishlist"
+				group="people"
+				@change="log"
+				itemKey="name"
+			>
+				<template #item="{ element }">
+					<div class="list-group-item">
+						{{ element.place_name }}
+					</div>
+				</template>
+			</draggable>
+		</div>
+
+		<router-link to="/plan">
+			<button
+				type="submit"
+				class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+			>
+				다음
+			</button>
+		</router-link>
+	</div>
 	<div>
 		<div id="map"></div>
 	</div>
 </template>
 
 <script>
+import { getWishlist } from '../../api/wishlist';
+const wishs = ref([]);
+const fetchWishs = () => {
+	wishs.value = getWishlist();
+};
+fetchWishs();
+
 import { toRaw, ref } from 'vue';
 export default {
 	name: 'KakaoMap',

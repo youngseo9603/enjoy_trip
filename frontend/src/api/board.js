@@ -32,7 +32,10 @@ const registerBoard = (board, success, fail) =>{
 };
 
 const searchBoardsByMemberIndex = (memberIndex, success, fail) => {
-	boardAPI.get(`/board/search/member?memberIndex=${memberIndex}`).then(success).catch(fail);
+	boardAPI
+		.get(`/board/search/member?memberIndex=${memberIndex}`)
+		.then(success)
+		.catch(fail);
 }
 export default {
 	getList,

@@ -88,6 +88,7 @@ const login = () => {
 			if (data.status == 200) {
 				sessionStorage.setItem('memberIndex', data.data.memberIndex);
 				store.commit('setAccount', data.data.memberIndex);
+				console.log(store.state.account.memberIndex);
 				goMainPage();
 			}
 		},
