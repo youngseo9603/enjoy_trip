@@ -195,29 +195,31 @@ public class PlanService {
     public void updatePlanDay(Long wholePlanIndex, PlanDay planDaydto){
         com.example.trip.domain.PlanDay planDay = planDayRepository.findByPlanDayIndex(planDaydto.getPlayDayIndex());
 
+        if(planDay == null)
+            return;
+
         for(com.example.trip.domain.Plan plan : planDay.getPlan()){
             planRepository.delete(plan);
         }
         planDayRepository.delete(planDay);
 
-//        com.example.trip.domain.PlanDay pd = com.example.trip.domain.PlanDay.builder()
-//                .wholePlan(wholePlanRepository.findByWholePlanIndex(wholePlanIndex))
-//                .planDayIndex(planDaydto.getPlayDayIndex())
-//                .Date(planDaydto.getDate())
-//                .build();
-//        planDayRepository.save(pd);
-//
-//        for(Plan plan : planDaydto.getPlans()){
-//            com.example.trip.domain.Plan p = com.example.trip.domain.Plan.builder()
-//                    .planIndex(plan.getPlanIndex())
-//                    .address(plan.getAddress())
-//                    .placeName(plan.getPlaceName())
-//                    .category(plan.getCategory())
-//                    .orders(plan.getOrders())
-//                    .planDay(pd)
-//                    .build();
-//            planRepository.save(p);
-//        }
+        WholePlan wholePlan = wholePlanRepository.findByWholePlanIndex(wholePlanIndex);
+
+        com.example.trip.domain.PlanDay pd = com.example.trip.domain.PlanDay.builder()
+                .Date(planDay.getDate())
+                .wholePlan(wholePlan)
+                .build();
+        planDayRepository.save(pd);
+        for(Plan plan : planDaydto.getPlans()){
+            com.example.trip.domain.Plan p = com.example.trip.domain.Plan.builder()
+                    .address(plan.getAddress())
+                    .placeName(plan.getPlaceName())
+                    .category(plan.getCategory())
+                    .orders(plan.getOrders())
+                    .planDay(pd)
+                    .build();
+            planRepository.save(p);
+        }
 
     }
 
