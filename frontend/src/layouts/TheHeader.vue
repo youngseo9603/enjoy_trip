@@ -16,7 +16,7 @@
 					<RouterLink class="nav-link" to="/search">여행지</RouterLink>
 				</li>
 				<li class="nav-item">
-					<RouterLink class="nav-link" to="/planDate">여행계획하기</RouterLink>
+					<RouterLink class="nav-link" to="/plan">여행계획하기</RouterLink>
 				</li>
 				<li class="nav-item">
 					<RouterLink class="nav-link" to="/post?page=1">게시판</RouterLink>

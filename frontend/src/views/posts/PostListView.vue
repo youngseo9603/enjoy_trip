@@ -128,6 +128,7 @@ const getBoards = () => {
 			boards.value = data.data;
 			console.log(boards.value);
 		},
+
 		() => {
 			console.log('부서 목록 조회에 실패하였습니다.');
 		},

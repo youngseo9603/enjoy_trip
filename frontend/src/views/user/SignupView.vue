@@ -66,6 +66,7 @@
 					class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
 					pattern=".{1,}"
 					placeholder=" "
+					required
 				/>
 				<label
 					for="id_firstname"
@@ -93,7 +94,7 @@
 			<p class="ml-1 mb-2 text-xs text-gray-500">
 				패스워드는 8글자 이상 작성해주세요.
 			</p>
-			<div class="mb-4 relative">
+			<div class="mb-1 relative">
 				<input
 					type="password"
 					name="password2"
@@ -108,7 +109,7 @@
 					>패스워드 확인</label
 				>
 			</div>
-			<p v-if="passwordsDoNotMatch" class="text-red-500 text-xs ml-1 mt-1">
+			<p v-if="passwordsDoNotMatch" class="ml-1 mb-2 text-xs text-red-500">
 				패스워드가 일치하지 않습니다.
 			</p>
 
@@ -138,7 +139,7 @@
 import memberAPI from '@/api/member.js';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
+const passwordsDoNotMatch = ref(true);
 const route = useRoute();
 const router = useRouter();
 const member = ref({});

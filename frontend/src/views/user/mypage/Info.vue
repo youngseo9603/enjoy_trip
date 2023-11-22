@@ -23,7 +23,7 @@ const startMyPage = () => {
 			console.log('마이 데이터 정보 불러오기 실패');
 		},
 	);
-}
+};
 
 startMyPage();
 </script>

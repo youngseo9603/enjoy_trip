@@ -1,7 +1,19 @@
 <script setup>
+import { ref, watch } from 'vue';
 import TheHeader from '@/layouts/TheHeader.vue';
 import TheView from '@/layouts/TheView.vue';
 import TheFooter from '@/layouts/TheFooter.vue';
+
+const transitionName = ref('');
+
+watch('$route', (to, from) => {
+	if (to.meta.page == null || from.meta.page == null) {
+		transitionName.value = 'fade';
+	} else {
+		transitionName.value = to.meta.page > from.meta.page ? 'next' : 'prev';
+	}
+	console.log(transitionName.value);
+});
 </script>
 
 <template>
