@@ -192,11 +192,11 @@ public class PlanService {
     }
 
     @Transactional
-    public void updatePlanDay(Long wholePlanIndex, PlanDay planDaydto){
+    public boolean updatePlanDay(Long wholePlanIndex, PlanDay planDaydto){
         com.example.trip.domain.PlanDay planDay = planDayRepository.findByPlanDayIndex(planDaydto.getPlayDayIndex());
 
         if(planDay == null)
-            return;
+            return false;
 
         for(com.example.trip.domain.Plan plan : planDay.getPlan()){
             planRepository.delete(plan);
@@ -221,6 +221,7 @@ public class PlanService {
             planRepository.save(p);
         }
 
+        return true;
     }
 
 }

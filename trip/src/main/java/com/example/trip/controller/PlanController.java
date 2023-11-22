@@ -72,8 +72,11 @@ public class PlanController {
 
     @PutMapping("/date")
     public ResponseEntity<?> modifyPlanDayByPlanDayIndex(@RequestParam Long wholePlanIndex, @RequestParam Long planDayIndex, @RequestBody PlanDay planDay){
-        planService.updatePlanDay(wholePlanIndex, planDay);
-        Message message = new Message(StatusCode.OK, "여행 계획 날짜별 수정 성공");
+        Message message;
+        if(planService.updatePlanDay(wholePlanIndex, planDay))
+            message = new Message(StatusCode.OK, "여행 계획 날짜별 수정 성공");
+        else
+            message = new Message(StatusCode.BAD_REQUEST, "해당하는 planDay를 찾을 수 없습니다.");
         return ResponseEntity.ok(message);
     }
 
