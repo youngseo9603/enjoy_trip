@@ -23,7 +23,7 @@
 							itemKey="name"
 						>
 							<template #item="{ element }">
-								<div class="list-group-item">{{ element.place_name }}</div>
+								<div class="list-group-item">{{ element.placeName }}</div>
 							</template>
 						</draggable>
 					</router-link>
@@ -79,6 +79,7 @@ import { getWishlist } from '../../api/wishlist';
 //더미데이터
 import { toRaw, ref } from 'vue';
 import store from '@/stores/index';
+import draggable from 'vuedraggable';
 const wishs = ref([]);
 // const fetchWishs = () => {
 // 	wishAPI.getWishList(
@@ -99,7 +100,6 @@ const fetchWishs = () => {
 fetchWishs();
 //더미데이터
 
-import draggable from 'vuedraggable';
 export default {
 	name: 'travel-lists',
 	display: 'travel Lists',
@@ -133,6 +133,18 @@ export default {
 		log: function (evt) {
 			window.console.log(evt);
 		},
+	},
+	mounted() {
+		wishAPI.getWishList(
+			store.state.account.memberIndex,
+			({ data }) => {
+				wishs.value = data.data;
+				console.log(data.message);
+			},
+			() => {
+				console.log("위시리스트 불러오기 실패");
+			}
+		);
 	},
 };
 </script>

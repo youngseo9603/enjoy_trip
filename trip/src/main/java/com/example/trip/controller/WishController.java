@@ -33,7 +33,7 @@ public class WishController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> delteWish(@RequestParam Long memberIndex, @RequestBody Long wishIndex){
+    public ResponseEntity<?> deleteWish(@RequestParam Long memberIndex, @RequestBody Long wishIndex){
         wishService.deleteWish(memberIndex, wishIndex);
         Message message = new Message(StatusCode.OK, "위시 리스트 생성 성공");
         return ResponseEntity.ok(message);
