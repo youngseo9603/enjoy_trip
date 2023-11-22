@@ -1,23 +1,24 @@
 package com.example.trip.domain;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="wish")
+@Table(name="Wish")
 @Getter
 @Setter
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Wish {
     @Id
     @GeneratedValue
     @Column(name = "wishIndex")
     private Long wishIndex;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "memberIndex")
     private Member member;
 
