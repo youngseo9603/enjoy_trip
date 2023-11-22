@@ -11,6 +11,7 @@ import router from './router';
 import vuex from 'vuex';
 import stores from '@/stores/index';
 const app = createApp(App);
+
 app.use(DatePicker);
 app.use(createPinia());
 app.use(router);

@@ -1,34 +1,18 @@
 <template>
 	<div class="grid grid-cols-4 gap-4 back items-center">
-		<div
-			class="col-span-3"
-			style="white-space: nowrap; overflow-x: auto; overflow-y: hidden"
-		>
-			<template v-for="(day, index) in days" :key="day.place_name">
-				<div
-					style="
-						width: 200px;
-						height: 200px;
-						display: inline-block;
-						margin-right: 10px;
-					"
-				>
-					<router-link :to="{ path: '/plan/' + (index + 1) }">
-						<h3>{{ index + 1 }}일째 여행지</h3>
-						<draggable
-							class="list-group"
-							:list="getList(index)"
-							group="people"
-							@change="log"
-							itemKey="name"
-						>
-							<template #item="{ element }">
-								<div class="list-group-item">{{ element.place_name }}</div>
-							</template>
-						</draggable>
-					</router-link>
-				</div>
-			</template>
+		<div class="col-span-3">
+			<h3>{{ $route.params.index }}일째 여행지</h3>
+			<draggable
+				class="list-group"
+				:list="getList($route.params.index)"
+				group="people"
+				@change="log"
+				itemKey="name"
+			>
+				<template #item="{ element }">
+					<div class="list-group-item">{{ element.place_name }}</div>
+				</template>
+			</draggable>
 		</div>
 		<div class="col-span-1">
 			<h3>즐겨찾기한 여행지</h3>
@@ -68,11 +52,22 @@ const fetchWishs = () => {
 	wishs.value = getWishlist();
 };
 fetchWishs();
-
+import draggable from 'vuedraggable';
 import { toRaw, ref } from 'vue';
 export default {
 	name: 'KakaoMap',
+	components: {
+		draggable,
+	},
 	data() {
+		const days = 6;
+		const generateLists = () => {
+			const lists = {};
+			for (let i = 1; i <= days; i++) {
+				lists[`list${i}`] = [];
+			}
+			return lists;
+		};
 		return {
 			reqPositions: [
 				[33.450705, 126.570677], //시작 지점이 주어져야 됨
@@ -87,6 +82,12 @@ export default {
 			dp: null,
 			trackArr: null,
 			path: null,
+			...generateLists(),
+			wishlist: wishs.value,
+			days: Array.from({ length: days }, (_, index) => ({
+				// 생성자로 초기값 설정
+				place_name: `Place ${index + 1}`,
+			})),
 		};
 	},
 	mounted() {
@@ -102,6 +103,13 @@ export default {
 		}
 	},
 	methods: {
+		getList(index) {
+			// 각 일자에 해당하는 리스트 반환
+			return this[`list${index + 1}`];
+		},
+		log: function (evt) {
+			window.console.log(evt);
+		},
 		initMap() {
 			const container = document.getElementById('map');
 			const options = {

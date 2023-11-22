@@ -13,7 +13,7 @@
 						margin-right: 10px;
 					"
 				>
-					<router-link :to="{ path: '/plan/' + (index + 1) }">
+					<router-link :to="{ path: '/plan/path/' + (index + 1) }">
 						<h3>{{ index + 1 }}일째 여행지</h3>
 						<draggable
 							class="list-group"
@@ -29,26 +29,37 @@
 					</router-link>
 				</div>
 			</template>
-			<div class="col-3">
-				<h3>즐겨찾기한 여행지</h3>
-				<draggable
-					class="list-group"
-					:list="wishlist"
-					group="people"
-					@change="log"
-					itemKey="name"
-				>
-					<template #item="{ element }">
-						<div class="list-group-item">
-							{{ element.placeName }}
-						</div>
-					</template>
-				</draggable>
-			</div>
+		</div>
+		<div class="col-span-1">
+			<!-- <h3>즐겨찾기한 여행지</h3>
+			<draggable
+				class="list-group"
+				:list="wishlist"
+				group="people"
+				@change="log"
+				itemKey="name"
+			>
+				<template #item="{ element }">
+					<div class="list-group-item">
+						{{ element.placeName }}
+					</div>
+				</template>
+			</draggable> -->
 
-			<div class="col-3">
-				<RouterView></RouterView>
-			</div>
+			<h3>즐겨찾기한 여행지</h3>
+			<draggable
+				class="list-group"
+				:list="wishlist"
+				group="people"
+				@change="log"
+				itemKey="name"
+			>
+				<template #item="{ element }">
+					<div class="list-group-item">
+						{{ element.place_name }}
+					</div>
+				</template>
+			</draggable>
 		</div>
 
 		<router-link to="/plan">
@@ -64,22 +75,29 @@
 
 <script>
 import wishAPI from '@/api/wish';
+import { getWishlist } from '../../api/wishlist';
+//더미데이터
 import { toRaw, ref } from 'vue';
 import store from '@/stores/index';
 const wishs = ref([]);
+// const fetchWishs = () => {
+// 	wishAPI.getWishList(
+// 		store.state.account.memberIndex,
+// 		({ data }) => {
+// 			wishs.value = data.data;
+// 			console.log(data.message);
+// 		},
+// 		() => {
+// 			console.log('위시리스트 불러오기 실패');
+// 		},
+// 	);
+// };
+// fetchWishs();
 const fetchWishs = () => {
-	wishAPI.getWishList(
-		store.state.account.memberIndex,
-		({data})=>{
-			wishs.value = data.data;
-			console.log(data.message);
-		},
-		() =>{
-			console.log("위시리스트 불러오기 실패");
-		}
-	)
+	wishs.value = getWishlist();
 };
 fetchWishs();
+//더미데이터
 
 import draggable from 'vuedraggable';
 export default {
@@ -90,8 +108,7 @@ export default {
 		draggable,
 	},
 	data() {
-		const days = 20;
-		const selectedIndex = ref(0);
+		const days = 6;
 		const generateLists = () => {
 			const lists = {};
 			for (let i = 1; i <= days; i++) {
@@ -115,9 +132,6 @@ export default {
 		},
 		log: function (evt) {
 			window.console.log(evt);
-		},
-		setIndex: function (index) {
-			this.selectedIndex = index; // Set the selected index
 		},
 	},
 };

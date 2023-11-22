@@ -114,7 +114,7 @@ const router = createRouter({
 					},
 				},
 				{
-					path: 'path/:id',
+					path: 'path/:index',
 					name: 'path',
 					component: PlanMapPathView,
 				},
