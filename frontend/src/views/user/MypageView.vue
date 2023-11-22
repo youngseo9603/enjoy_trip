@@ -22,8 +22,7 @@
 				>
 				<router-link to="/mypage/mycomment"
 					><li>
-						<img src="@/assets/icon/comment.svg" alt="SVG Icon" />내가
-						위시리스트
+						<img src="@/assets/icon/comment.svg" alt="SVG Icon" />내 위시리스트
 					</li></router-link
 				>
 				<router-link to="/mypage/mypost"
