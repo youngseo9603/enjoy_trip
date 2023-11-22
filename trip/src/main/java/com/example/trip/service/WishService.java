@@ -47,4 +47,9 @@ public class WishService {
         wishRepository.save(wish);
     }
 
+    public void deleteWish(Long memberIndex, Long wishIndex){
+        Wish wish = wishRepository.findByWishIndex(wishIndex);
+        wishRepository.delete(wish);
+    }
+
 }

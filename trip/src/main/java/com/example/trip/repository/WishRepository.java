@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface WishRepository extends JpaRepository<Wish, Long> {
     List<Wish> findAllByMember(Member member);
+    Wish findByWishIndex(Long wishIndex);
 }
