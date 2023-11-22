@@ -1,8 +1,18 @@
 <template>
-	<div class="flex flex-col back items-center">
-		<div class="row" style="width: 100%">
+	<div class="grid grid-cols-4 gap-4 back items-center">
+		<div
+			class="col-span-3"
+			style="white-space: nowrap; overflow-x: auto; overflow-y: hidden"
+		>
 			<template v-for="(day, index) in days" :key="day.place_name">
-				<div style="width: 200px">
+				<div
+					style="
+						width: 200px;
+						height: 200px;
+						display: inline-block;
+						margin-right: 10px;
+					"
+				>
 					<router-link :to="{ path: '/plan/' + (index + 1) }">
 						<h3>{{ index + 1 }}일째 여행지</h3>
 						<draggable
@@ -19,27 +29,22 @@
 					</router-link>
 				</div>
 			</template>
-
-			<div class="col-3">
-				<h3>즐겨찾기한 여행지</h3>
-				<draggable
-					class="list-group"
-					:list="wishlist"
-					group="people"
-					@change="log"
-					itemKey="name"
-				>
-					<template #item="{ element }">
-						<div class="list-group-item">
-							{{ element.place_name }}
-						</div>
-					</template>
-				</draggable>
-			</div>
-
-			<div class="col-3">
-				<RouterView></RouterView>
-			</div>
+		</div>
+		<div class="col-span-1">
+			<h3>즐겨찾기한 여행지</h3>
+			<draggable
+				class="list-group"
+				:list="wishlist"
+				group="people"
+				@change="log"
+				itemKey="name"
+			>
+				<template #item="{ element }">
+					<div class="list-group-item">
+						{{ element.place_name }}
+					</div>
+				</template>
+			</draggable>
 		</div>
 
 		<router-link to="/plan">
@@ -57,7 +62,6 @@
 import { getWishlist } from '../../api/wishlist';
 import { toRaw, ref } from 'vue';
 const wishs = ref([]);
-const days = 5;
 const fetchWishs = () => {
 	wishs.value = getWishlist();
 };
@@ -72,7 +76,7 @@ export default {
 		draggable,
 	},
 	data() {
-		const days = 3;
+		const days = 20;
 		const selectedIndex = ref(0);
 		const generateLists = () => {
 			const lists = {};
