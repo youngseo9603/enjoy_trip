@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col back items-center">
 		<div class="flex col-span-7" style="position: static; margin-top: 2rem">
-			<div class="col-span-1">
+			<div class="col-span-1 mr-5">
 				<h3>{{ $route.params.index }}일째 여행지</h3>
 				<draggable
 					class="list-group"
@@ -33,19 +33,23 @@
 		</div> -->
 			<div class="col-span-3">
 				<div id="map"></div>
+				<div class="flex justify-center">
+					<button @click="startFunc">최적 경로 찾기</button>
+				</div>
 			</div>
-			<button @click="startFunc">최적 경로 찾기</button>
 		</div>
 	</div>
-	<router-link to="/plan/wholeplan">
-		<button
-			type="submit"
-			class="mt-1 border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
-			style="width: 100px"
-		>
-			이전
-		</button>
-	</router-link>
+	<div class="flex justify-center">
+		<router-link to="/plan/wholeplan">
+			<button
+				type="submit"
+				class="mt-1 border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+				style="width: 100px"
+			>
+				이전
+			</button>
+		</router-link>
+	</div>
 </template>
 
 <script>

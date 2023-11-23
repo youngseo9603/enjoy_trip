@@ -15,7 +15,8 @@
 							required
 						/>
 						<button
-							class="!absolute right-1 top-1 z-10 select-none rounded bg-pink-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-blue-gray-500 peer-placeholder-shown:opacity-50 peer-placeholder-shown:shadow-none"
+							class="!absolute z-10 select-none rounded bg-indigo-950 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-blue-gray-500 peer-placeholder-shown:opacity-50 peer-placeholder-shown:shadow-none"
+							style="height: 100%; right: -2px"
 							type="button"
 							data-ripple-light="true"
 						>
@@ -39,7 +40,6 @@
 				</table>
 			</div>
 		</div>
-		<div class="flex"></div>
 	</div>
 </template>
 
@@ -245,7 +245,7 @@ export default {
 }
 #map {
 	width: 600px;
-	height: 600px;
+	height: 400px;
 	margin-right: 100px;
 }
 

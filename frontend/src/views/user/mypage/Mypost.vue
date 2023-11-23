@@ -43,6 +43,11 @@ const goPage = id => {
 	});
 };
 
+const formatDateTime = dateTime => {
+	// Assuming dateTime is in the format '2023-11-23T23:38:23.438519'
+	const formattedDate = dateTime.slice(0, 10); // Extracts '2023-11-23'
+	return formattedDate;
+};
 const startFunc = () => {
 	boardAPI.searchBoardsByMemberIndex(
 		store.state.account.memberIndex,
