@@ -170,7 +170,8 @@ export default {
 					var address = ref({});
 					address.value.addr1 = data.address_name;
 					address.value.addr2 = data.road_address_name;
-					address.value.longtitude = [data.x, data.y];
+					address.value.latitude = data.x;
+					address.value.longitude = data.y;
 
 					wish.value.address = address;
 					wish.value.placeName = data.place_name;
