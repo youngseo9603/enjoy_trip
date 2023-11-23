@@ -3,20 +3,20 @@
 	<br />
 	<table>
 		<tr>
-			<td>이름</td>
-			<td>좌소연</td>
+			<th>이름</th>
+			<td>{{ member.name }}</td>
 		</tr>
 		<tr>
-			<td>닉네임</td>
-			<td>짜짜로니소연</td>
+			<th>닉네임</th>
+			<td>{{ member.nickname }}</td>
 		</tr>
 		<tr>
-			<td>이메일</td>
-			<td>jwa1234@jwa.jwa</td>
+			<th>이메일</th>
+			<td>{{ member.email }}</td>
 		</tr>
 		<tr>
-			<td>아이디</td>
-			<td>jwa1234</td>
+			<th>아이디</th>
+			<td>{{ member.loginId }}</td>
 		</tr>
 	</table>
 
