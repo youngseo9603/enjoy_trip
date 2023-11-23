@@ -1,7 +1,7 @@
 <template>
 	<header>
 		<nav
-			class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+			class="flex flex-wrap items-center justify-between mx-auto p-4 bg-white"
 		>
 			<RouterLink
 				class="navbar-brand mr-5"

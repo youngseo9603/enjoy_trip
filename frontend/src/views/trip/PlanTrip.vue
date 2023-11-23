@@ -23,7 +23,7 @@
 							itemKey="name"
 						>
 							<template #item="{ element }">
-								<div class="list-group-item">{{ element.placeName }}</div>
+								<div class="list-group-item">{{ element.place_name }}</div>
 							</template>
 						</draggable>
 					</router-link>
@@ -75,7 +75,7 @@
 
 <script>
 import wishAPI from '@/api/wish';
-import { getWishlist } from '../../api/wishlist';
+import { getWishlist, date } from '../../api/wishlist';
 //더미데이터
 import { toRaw, ref } from 'vue';
 import store from '@/stores/index';
@@ -108,10 +108,9 @@ export default {
 		draggable,
 	},
 	data() {
-		const days = 6;
 		const generateLists = () => {
 			const lists = {};
-			for (let i = 1; i <= days; i++) {
+			for (let i = 1; i <= this.daycount; i++) {
 				lists[`list${i}`] = [];
 			}
 			return lists;
@@ -119,7 +118,7 @@ export default {
 		return {
 			...generateLists(),
 			wishlist: wishs.value,
-			days: Array.from({ length: days }, (_, index) => ({
+			days: Array.from({ length: this.daycount }, (_, index) => ({
 				// 생성자로 초기값 설정
 				place_name: `Place ${index + 1}`,
 			})),
@@ -134,6 +133,7 @@ export default {
 			window.console.log(evt);
 		},
 	},
+
 	mounted() {
 		wishAPI.getWishList(
 			store.state.account.memberIndex,
@@ -142,8 +142,8 @@ export default {
 				console.log(data.message);
 			},
 			() => {
-				console.log("위시리스트 불러오기 실패");
-			}
+				console.log('위시리스트 불러오기 실패');
+			},
 		);
 	},
 };

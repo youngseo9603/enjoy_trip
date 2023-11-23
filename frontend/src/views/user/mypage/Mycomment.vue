@@ -1,5 +1,5 @@
 <template>
-	<div>내 위시리스트</div>
+	<h2>내 위시리스트</h2>
 	<div>{{ wishlist }}</div>
 </template>
 
@@ -24,12 +24,11 @@ export default {
 				console.log(data.message);
 			},
 			() => {
-				console.log("위시리스트 불러오기 실패");
-			}
+				console.log('위시리스트 불러오기 실패');
+			},
 		);
-	}
-}
-
+	},
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>
