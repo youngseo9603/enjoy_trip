@@ -1,5 +1,5 @@
 <template>
-	<div class="grid grid-cols-4 gap-4 back items-center">
+	<div class="grid grid-cols-4 gap-4 back items-center px-5">
 		<div
 			class="col-span-3"
 			style="white-space: nowrap; overflow-x: auto; overflow-y: hidden"
@@ -47,29 +47,35 @@
 			</draggable> -->
 
 			<h3>즐겨찾기한 여행지</h3>
-			<draggable
-				class="list-group"
-				:list="wishlist[0]"
-				group="people"
-				@change="log"
-				itemKey="name"
-			>
-				<template #item="{ element }">
-					<div class="list-group-item">
-						{{ element.placeName }}
-					</div>
-				</template>
-			</draggable>
+			<br />
+			<div style="overflow: scroll; height: 300px">
+				<draggable
+					class="list-group"
+					:list="wishlist[0]"
+					group="people"
+					@change="log"
+					itemKey="name"
+				>
+					<template #item="{ element }">
+						<div class="list-group-item">
+							{{ element.placeName }}
+						</div>
+					</template>
+				</draggable>
+			</div>
 		</div>
 
-		<router-link to="/plan">
-			<button
-				type="submit"
-				class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
-			>
-				다음
-			</button>
-		</router-link>
+		<div class="col-span-4 flex justify-center">
+			<router-link to="/mypage/mytrip">
+				<button
+					type="submit"
+					class="mt-1 border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+					style="width: 100px"
+				>
+					확정하기
+				</button>
+			</router-link>
+		</div>
 	</div>
 </template>
 
@@ -156,5 +162,10 @@ export default {
 .back {
 	width: 100%;
 	height: 600px;
+}
+h3 {
+	font-weight: 600;
+	margin-bottom: 5px;
+	margin-left: 5px;
 }
 </style>

@@ -30,7 +30,7 @@
 			<div class="col-span-4">
 				<table id="list">
 					<thead>
-						<th style="width: 50px">번호</th>
+						<th style="width: 60px">번호</th>
 						<th style="width: 200px">장소</th>
 						<th style="width: 200px">주소</th>
 						<th style="width: 200px">번호</th>
@@ -249,8 +249,6 @@ export default {
 	},
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .back {
 	width: 100%;
@@ -297,11 +295,22 @@ tbody:hover {
 	border: lightgray 1px solid;
 	width: 40px;
 }
-
+th {
+	margin-right: 2px;
+	text-overflow: ellipsis;
+	border-bottom: lightgray solid 1px;
+}
 td {
 	margin-right: 2px;
-	/* white-space: nowrap; */
-	/* overflow: hidden; */
+	padding: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-bottom: lightgray solid 1px;
+}
+.list-group-item {
+	white-space: nowrap;
+	overflow: hidden;
 	text-overflow: ellipsis;
 }
 </style>
