@@ -57,12 +57,15 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import store from '@/stores/index';
-const route = useRoute();
-const router = useRouter();
+
 import dayjs from 'dayjs';
 import { ref } from 'vue';
+
+const route = useRoute();
+const router = useRouter();
+
 const dateFormat = 'YYYY/MM/DD';
-var wholePlan=ref({});
+var wholePlan = ref({});
 //stores에 입력받고 그값을 반환
 const datevalue = ref([
 	dayjs('2023/10/11', dateFormat),
@@ -74,26 +77,14 @@ const next = () => {
 };
 
 const gonext = () => {
-	store.commit('setPlanTitle',wholePlan.value.title);
-	store.commit('setAccomodation',wholePlan.value.accommodation);
+	store.commit('setPlanTitle', wholePlan.value.title);
+	store.commit('setAccomodation', wholePlan.value.accommodation);
 
-	var startDate = {
-		day: datevalue.value[0].$D,
-		month: datevalue.value[0].$M,
-		year: datevalue.value[0].$y,
-	};
-
-	var endDate = {
-		day: datevalue.value[1].$D,
-		month: datevalue.value[1].$M,
-		year: datevalue.value[1].$y,
-	};
-
-	store.commit('setStartDate', startDate);
-	store.commit('setEndDate', endDate);
+	store.commit('setStartDate', datevalue.value[0].$d);
+	store.commit('setEndDate', datevalue.value[1].$d);
 
 	router.push({ name: 'planLocation' });
-}
+};
 </script>
 
 <style lang="scss" scoped>

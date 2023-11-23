@@ -2,9 +2,26 @@
 	<div class="flex flex-col back items-center">
 		<div class="flex col-span-7" style="position: static; margin-top: 2rem">
 			<div class="col-span-2">
-				<form @submit.prevent="searchLoc()">
+				<!-- <form @submit.prevent="searchLoc()">
 					<input v-model="searchText" placeholder="검색어를 입력하세요." />
 					<button>검색</button>
+				</form> -->
+				<form @submit.prevent="searchLoc()">
+					<div class="relative flex h-10 w-full" style="width: 600px">
+						<input
+							class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 pr-20 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+							v-model="searchText"
+							placeholder="검색어를 입력해주세요 "
+							required
+						/>
+						<button
+							class="!absolute right-1 top-1 z-10 select-none rounded bg-pink-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-blue-gray-500 peer-placeholder-shown:opacity-50 peer-placeholder-shown:shadow-none"
+							type="button"
+							data-ripple-light="true"
+						>
+							검색
+						</button>
+					</div>
 				</form>
 				<div id="map"></div>
 			</div>
@@ -13,7 +30,7 @@
 				<table id="list">
 					<thead>
 						<th style="width: 50px">번호</th>
-						<th style="width: 170px">장소</th>
+						<th style="width: 200px">장소</th>
 						<th style="width: 200px">주소</th>
 						<th style="width: 200px">번호</th>
 						<th style="width: 120px">카테고리</th>
@@ -23,18 +40,11 @@
 			</div>
 		</div>
 		<div class="flex">
-			<router-link to="/plan">
-				<button
-					type="submit"
-					class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
-				>
-					이전
-				</button>
-			</router-link>
 			<router-link to="/plan/wholeplan">
 				<button
 					type="submit"
 					class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+					style="width: 100px"
 				>
 					다음
 				</button>
@@ -149,8 +159,10 @@ export default {
 
 				const category = document.createElement('div');
 				category.innerText = data.category_group_name;
-
+				const buttonbox = document.createElement('div');
+				buttonbox.classList.add('button-box');
 				const selectwish = document.createElement('button');
+				selectwish.classList.add('select-wish');
 				selectwish.innerText = '담기';
 				selectwish.addEventListener('click', () => {
 					//위시 리스트에 담기
@@ -158,29 +170,28 @@ export default {
 					var address = ref({});
 					address.value.addr1 = data.address_name;
 					address.value.addr2 = data.road_address_name;
-					address.value.longtitude = [data.x, data.y];
+					address.value.latitude = data.x;
+					address.value.longitude = data.y;
 
 					wish.value.address = address;
 					wish.value.placeName = data.place_name;
 					wish.value.category = data.category_group_name;
 					wish.value.memberIndex = store.state.account.memberIndex;
 
-					wishAPI.addWish(
-						wish.value,
-						({data})=>{
-							alert("성공적으로 위시리스트에 담았습니다.");
-							console.log(data.message);
-						}),
-						() =>{
-							console.log("위시리스트 담기 실패");
-						}
+					wishAPI.addWish(wish.value, ({ data }) => {
+						alert('성공적으로 위시리스트에 담았습니다.');
+						console.log(data.message);
+					}),
+						() => {
+							console.log('위시리스트 담기 실패');
+						};
 				});
 
 				content.appendChild(placeName);
 				content.appendChild(address);
 				content.appendChild(category);
-				content.appendChild(selectwish);
-
+				content.appendChild(buttonbox);
+				buttonbox.appendChild(selectwish);
 				infowindow.setContent(content);
 				infowindow.setPosition(marker.getPosition());
 				infowindow.open(map, marker);
@@ -236,7 +247,6 @@ export default {
 		},
 	},
 };
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -247,7 +257,7 @@ export default {
 }
 #map {
 	width: 600px;
-	height: 400px;
+	height: 600px;
 	margin-right: 100px;
 }
 
@@ -276,5 +286,21 @@ tbody:hover {
 	font-weight: bold;
 	border-bottom: 1px solid;
 	margin-bottom: 0.5rem;
+}
+
+.button-box {
+	text-align: right;
+	justify-content: flex-end;
+}
+.select-wish {
+	border: lightgray 1px solid;
+	width: 40px;
+}
+
+td {
+	margin-right: 2px;
+	/* white-space: nowrap; */
+	/* overflow: hidden; */
+	text-overflow: ellipsis;
 }
 </style>

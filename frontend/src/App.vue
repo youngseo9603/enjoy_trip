@@ -28,7 +28,11 @@ watch('$route', (to, from) => {
 	src: url('assets/fonts/NanumBarunGothic.ttf') format('truetype');
 	font-weight: 400;
 }
-
+header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
 @media (min-width: 1024px) {
 	.logo {
 		margin: 0 2rem 0 0;

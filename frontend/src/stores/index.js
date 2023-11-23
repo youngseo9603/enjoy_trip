@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import memberAPI from '@/api/member.js';
+import { ref } from 'vue';
 
 const store = createStore({
 	state() {
@@ -8,13 +9,17 @@ const store = createStore({
 				memberIndex: 0,
 				memberNickName: '',
 			},
-			wholePlan :{
-				planTitle:'',
-				startDate:{},
-				endDate : {},
-				accomodation : '',
-				planDay :[]
-			}
+			wholePlan: {
+				planTitle: '',
+				startDate: '',
+				endDate: '',
+				accomodation: '',
+				planDay: [],
+			},
+			planList: {
+				daysList: {},
+				wishList: {},
+			},
 		};
 	},
 	mutations: {
@@ -35,22 +40,26 @@ const store = createStore({
 			state.account.memberIndex = 0;
 			state.account.memberNickName = '';
 		},
-		setPlanTitle(state, title){
+		setPlanTitle(state, title) {
 			state.wholePlan.planTitle = title;
 		},
-		setAccomodation(state, accomodation){
+		setAccomodation(state, accomodation) {
 			state.wholePlan.accomodation = accomodation;
 		},
-		setStartDate(state, startTime){
-			state.wholePlan.startDate.year = startTime.year;
-			state.wholePlan.startDate.month = startTime.month;
-			state.wholePlan.startDate.day = startTime.day;
+		setStartDate(state, startTime) {
+			state.wholePlan.startDate = startTime;
 		},
-		setEndDate(state, startTime){
-			state.wholePlan.endDate.year = startTime.year;
-			state.wholePlan.endDate.month = startTime.month;
-			state.wholePlan.endDate.day = startTime.day;
-		}
+		setEndDate(state, startTime) {
+			state.wholePlan.endDate = startTime;
+		},
+		setWishList(state, wishList) {
+			console.log('wishlist  ', wishList);
+			state.planList.wishList = wishList;
+		},
+		setDaysList(state, list) {
+			console.log('list   ', list);
+			state.planList.daysList = list;
+		},
 	},
 });
 

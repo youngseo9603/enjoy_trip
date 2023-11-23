@@ -31,8 +31,8 @@ const goPage = id => {
 				class="d-flex flex-column align-items-center position-absolute"
 				style="top: 30%"
 			>
-				<h2 class="text-white">나만의 여행 플래너 어스토리</h2>
-				<h4 class="text-white">쉽고 빠르게 계획하세요.</h4>
+				<p class="text-white fontsizelarge">나만의 여행 플래너 어스토리</p>
+				<h4 class="text-white fontsizemiddle my-2">쉽고 빠르게 계획하세요.</h4>
 				<router-link to="/search"
 					><a-space direction="vertical">
 						<a-input-search
@@ -43,7 +43,9 @@ const goPage = id => {
 							style="width: 500px"
 						>
 							<template #enterButton>
-								<a-button>검색</a-button>
+								<a-button class="abutton">
+									<p style="color: white">검색</p></a-button
+								>
 							</template>
 						</a-input-search>
 					</a-space></router-link
@@ -70,3 +72,16 @@ const goPage = id => {
 		</div>
 	</main>
 </template>
+<style>
+.abutton {
+	background-color: lightgray;
+	color: white;
+}
+
+.fontsizelarge {
+	font-size: 35px;
+}
+.fontsizemiddle {
+	font-size: 25px;
+}
+</style>
