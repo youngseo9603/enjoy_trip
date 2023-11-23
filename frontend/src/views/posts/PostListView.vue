@@ -203,7 +203,7 @@ table {
 }
 #board-search .search-window .search-wrap .btn {
 	position: absolute;
-	right: 0;
+	right: -2px;
 	top: 0;
 	bottom: 0;
 	width: 108px;

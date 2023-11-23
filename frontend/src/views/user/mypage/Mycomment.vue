@@ -1,5 +1,5 @@
 <template>
-	<div>내 위시리스트</div>
+	<h2>내 위시리스트</h2>
 	<div>{{ wishlist }}</div>
 </template>
 
@@ -31,4 +31,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

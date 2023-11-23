@@ -15,6 +15,7 @@ const addWish = (info, success, fail) => {
 };
 
 const getWishList = (memberIndex, success, fail) => {
+	console.log(memberIndex);
 	wishAPI.get(`/wish?memberIndex=${memberIndex}`).then(success).catch(fail);
 };
 

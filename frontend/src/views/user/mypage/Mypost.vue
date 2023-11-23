@@ -1,5 +1,6 @@
 <template>
-	<div>내 글 목록</div>
+	<h2>내 글 목록</h2>
+	<br />
 	<div id="board-list">
 		<div class="container">
 			<table class="board-table">
@@ -45,16 +46,20 @@ const goPage = id => {
 const startFunc = () => {
 	boardAPI.searchBoardsByMemberIndex(
 		store.state.account.memberIndex,
-		({data}) => {
+		({ data }) => {
 			boards.value = data.data;
 		},
 		() => {
-			console.log("게시판 찾기 실패");
-		}
-	)
-}
+			console.log('게시판 찾기 실패');
+		},
+	);
+};
 
 startFunc();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h2 {
+	font-size: 20px;
+}
+</style>

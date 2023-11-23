@@ -5,9 +5,11 @@ import com.example.trip.controller.constant.StatusCode;
 import com.example.trip.domain.WholePlan;
 import com.example.trip.dto.Board.ListBoardResponse;
 import com.example.trip.dto.Plan.*;
+import com.example.trip.dto.WholePlanAndWishListRequest;
 import com.example.trip.repository.WholePlanRepository;
 import com.example.trip.service.MemberService;
 import com.example.trip.service.PlanService;
+import com.example.trip.service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +29,7 @@ import java.util.List;
 public class PlanController {
 
     private final PlanService planService;
+    private final WishService wishService;
 
     @GetMapping("/list")
     public ResponseEntity<?> getPlanList(@RequestParam Long memberIndex){
@@ -43,9 +46,10 @@ public class PlanController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createWholePlan(@RequestParam Long memberIndex, @RequestBody CreateWholePlanRequest createWholePlanRequest){
-        planService.createWholePlan(createWholePlanRequest, memberIndex);
-        Message message = new Message(StatusCode.OK, "여행 계획 등록 성공");
+    public ResponseEntity<?> createWholePlan(@RequestParam Long memberIndex, @RequestBody WholePlanAndWishListRequest request){
+        planService.createWholePlan(request.getCreateWholePlanRequest(), memberIndex);
+        wishService.createWishList(memberIndex, request.getWishRequests());
+        Message message = new Message(StatusCode.OK, "여행 계획 등록 성공 및 위시리스트 수정 성공");
         return ResponseEntity.ok(message);
     }
 

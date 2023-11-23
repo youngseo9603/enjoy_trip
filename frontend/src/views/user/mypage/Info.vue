@@ -1,9 +1,29 @@
 <template>
-	<div>내 정보</div>
-	<div>{{ member.name }}</div>
+	<h2>내 정보</h2>
+	<br />
+	<table>
+		<tr>
+			<td>이름</td>
+			<td>좌소연</td>
+		</tr>
+		<tr>
+			<td>닉네임</td>
+			<td>짜짜로니소연</td>
+		</tr>
+		<tr>
+			<td>이메일</td>
+			<td>jwa1234@jwa.jwa</td>
+		</tr>
+		<tr>
+			<td>아이디</td>
+			<td>jwa1234</td>
+		</tr>
+	</table>
+
+	<!-- <div>{{ member.name }}</div>
 	<div>{{ member.nickname }}</div>
 	<div>{{ member.email }}</div>
-	<div>{{ member.loginId }}</div>
+	<div>{{ member.loginId }}</div> -->
 </template>
 
 <script setup>
@@ -28,4 +48,4 @@ const startMyPage = () => {
 startMyPage();
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

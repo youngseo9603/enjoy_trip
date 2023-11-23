@@ -81,6 +81,9 @@ const wishlist = [
 		y: '37.5036902997713',
 	},
 ];
-export function getWishlist() {
+function getWishlist() {
 	return wishlist;
 }
+const date = 3;
+
+export { date, getWishlist };

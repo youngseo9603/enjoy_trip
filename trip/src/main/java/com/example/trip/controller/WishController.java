@@ -27,7 +27,7 @@ public class WishController {
 
     @PostMapping
     public ResponseEntity<?> postWishList(@RequestParam Long memberIndex, @RequestBody WishRequest requests){
-        wishService.createWishList(memberIndex, requests);
+        wishService.createWish(memberIndex, requests);
         Message message = new Message(StatusCode.OK, "위시 리스트 생성 성공");
         return ResponseEntity.ok(message);
     }
