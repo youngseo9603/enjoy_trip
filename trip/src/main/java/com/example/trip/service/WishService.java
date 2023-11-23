@@ -36,7 +36,7 @@ public class WishService {
         return response;
     }
 
-    public void createWishList(Long memberIndex, WishRequest request){
+    public void createWish(Long memberIndex, WishRequest request){
         Member member = memberRepository.findByMemberIndex(memberIndex);
         Wish wish = Wish.builder()
                 .member(member)
@@ -50,6 +50,21 @@ public class WishService {
     public void deleteWish(Long memberIndex, Long wishIndex){
         Wish wish = wishRepository.findByWishIndex(wishIndex);
         wishRepository.delete(wish);
+    }
+
+    public void createWishList(Long memberIndex, List<WishResponse> requests){
+        List<Wish> wishes = wishRepository.findAllByMember(memberRepository.findByMemberIndex(memberIndex));
+        for(Wish w : wishes){
+            boolean notInResponse = true;
+            for(WishResponse request : requests){
+                if(w.getWishIndex().equals(request.getWishIndex())){
+                    notInResponse = false;
+                    break;
+                }
+            }
+            if(notInResponse)
+                wishRepository.delete(w);
+        }
     }
 
 }
