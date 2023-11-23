@@ -49,6 +49,7 @@
 			</table>
 		</div>
 	</div>
+	<div v-if="memberExist" class = "flex" style="width:80%; justify-content: flex-end"><button class="border-solid border-2 mt-2" style="width:100px; color:gray" @click="goCreatePage">등록하기</button></div>
 	<div class="grid place-items-center my-5">
 		<div class="pagination">
 			<button
@@ -66,7 +67,7 @@
 			</button>
 		</div>
 	</div>
-	<div v-if="memberExist"><button @click="goCreatePage">등록하기</button></div>
+	
 </template>
 
 <script setup>
