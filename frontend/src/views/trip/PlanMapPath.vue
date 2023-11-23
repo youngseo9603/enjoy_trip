@@ -4,13 +4,13 @@
 			<h3>{{ $route.params.index }}일째 여행지</h3>
 			<draggable
 				class="list-group"
-				:list="getList($route.params.index)"
+				:list="dayList"
 				group="people"
 				@change="log"
 				itemKey="name"
 			>
 				<template #item="{ element }">
-					<div class="list-group-item">{{ element.place_name }}</div>
+					<div class="list-group-item">{{ element.placeName }}</div>
 				</template>
 			</draggable>
 		</div>
@@ -25,7 +25,7 @@
 			>
 				<template #item="{ element }">
 					<div class="list-group-item">
-						{{ element.place_name }}
+						{{ element.placeName }}
 					</div>
 				</template>
 			</draggable>
@@ -39,6 +39,7 @@
 				다음
 			</button>
 		</router-link>
+		<button @click="startFunc">최적 경로 찾기</button>
 	</div>
 	<div>
 		<div id="map"></div>
@@ -46,35 +47,31 @@
 </template>
 
 <script>
-import { getWishlist } from '../../api/wishlist';
-const wishs = ref([]);
-const fetchWishs = () => {
-	wishs.value = getWishlist();
-};
-fetchWishs();
+// import { getWishlist } from '../../api/wishlist';
+import wishAPI from '@/api/wish';
+import { useRoute, useRouter } from 'vue-router';
+import store from '@/stores/index';
+// const fetchWishs = () => {
+// 	wishs.value = getWishlist();
+// };
+// fetchWishs();
 import draggable from 'vuedraggable';
-import { toRaw, ref } from 'vue';
+import { toRaw, ref, handleError } from 'vue';
 export default {
 	name: 'KakaoMap',
 	components: {
 		draggable,
 	},
 	data() {
-		const days = 6;
-		const generateLists = () => {
-			const lists = {};
-			for (let i = 1; i <= days; i++) {
-				lists[`list${i}`] = [];
-			}
-			return lists;
-		};
 		return {
 			reqPositions: [
-				[33.450705, 126.570677], //시작 지점이 주어져야 됨
-				[33.450936, 126.569477],
-				[33.450879, 126.56994],
+				// [33.450705, 126.570677], //시작 지점이 주어져야 됨
+				// [33.450936, 126.569477],
+				// [33.450879, 126.56994],
 			],
-			reqData: [{ title: '카카오' }, { title: '생태연못' }, { title: '텃밭' }],
+			reqData: [
+				// { title: '카카오' }, { title: '생태연못' }, { title: '텃밭' }
+			],
 			markers: [],
 			geocoder: null,
 			posSize: null,
@@ -82,12 +79,14 @@ export default {
 			dp: null,
 			trackArr: null,
 			path: null,
-			...generateLists(),
-			wishlist: wishs.value,
-			days: Array.from({ length: days }, (_, index) => ({
-				// 생성자로 초기값 설정
-				place_name: `Place ${index + 1}`,
-			})),
+			wishlist: store.state.planList.wishList,
+			dayList: null,
+			// days: Array.from({ length: days }, (_, index) => ({
+			// 	// 생성자로 초기값 설정
+			// 	place_name: `Place ${index + 1}`,
+			// })),
+			index: 0,
+			linePath: null,
 		};
 	},
 	mounted() {
@@ -102,13 +101,35 @@ export default {
 			document.head.appendChild(script);
 		}
 	},
+	created() {
+		this.index = this.$route.params.index;
+		this.dayList = store.state.planList.daysList[this.index - 1];
+
+		console.log('dayList    ', this.dayList[0]);
+		for (var i = 0; i < this.dayList.length; i++) {
+			this.reqPositions.push([
+				this.dayList[i].address.longitude,
+				this.dayList[i].address.latitude,
+			]);
+			this.reqData.push({ title: this.dayList[i].placeName });
+		}
+	},
 	methods: {
-		getList(index) {
-			// 각 일자에 해당하는 리스트 반환
-			return this[`list${index + 1}`];
-		},
 		log: function (evt) {
 			window.console.log(evt);
+
+			this.reqPositions = [];
+			for (var i = 0; i < this.dayList.length; i++) {
+				this.reqPositions.push([
+					this.dayList[i].address.longitude,
+					this.dayList[i].address.latitude,
+				]);
+				this.reqData.push({ title: this.dayList[i].placeName });
+			}
+
+			console.log('req   ', this.reqPositions);
+			this.linePath.setMap(null);
+			this.relocationMarker('black');
 		},
 		initMap() {
 			const container = document.getElementById('map');
@@ -123,7 +144,13 @@ export default {
 			this.geocoder = new kakao.maps.services.Geocoder();
 
 			this.displayMarker(this.reqPositions);
-			this.startFunc();
+
+			this.path = new Array();
+			for (var i = 0; i < this.reqPositions.length; i++) {
+				this.path.push(i);
+			}
+			this.relocationMarker('black');
+			//	this.startFunc();
 		},
 		changeSize(size) {
 			const container = document.getElementById('map');
@@ -167,11 +194,14 @@ export default {
 			infowindow.open(map, marker);
 		},
 		startFunc() {
+			this.linePath.setMap(null);
 			this.posSize = this.reqPositions.length;
 			this.graph = new Array(this.posSize);
 			this.dp = new Array(this.posSize);
 			this.trackArr = new Array(this.posSize);
 			this.path = new Array();
+
+			console.log(this.reqPositions);
 
 			for (var i = 0; i < this.posSize; i++) {
 				this.graph[i] = new Array(this.posSize);
@@ -197,9 +227,13 @@ export default {
 				this.trackArr[i] = new Array((1 << this.posSize) - 1);
 			}
 
+			for (var i = 0; i < this.path.length; i++) {
+				this.path = i;
+			}
+
 			this.tsp(0, 1);
 			this.findPath();
-			this.relocationMarker();
+			this.relocationMarker('red');
 		},
 		tsp(city, visitBitMask) {
 			if (visitBitMask == (1 << this.posSize) - 1) {
@@ -239,7 +273,7 @@ export default {
 
 			this.path.push(cur);
 		},
-		relocationMarker() {
+		relocationMarker(color) {
 			var MapX = new Array();
 			var MapY = new Array();
 
@@ -256,19 +290,19 @@ export default {
 			}
 
 			console.log(polyLine);
-			var linePath = new kakao.maps.Polyline({
+			this.linePath = new kakao.maps.Polyline({
 				path: polyLine, // 선을 구성하는 좌표배열 입니다
 
 				strokeWeight: 3, // 선의 두께 입니다
 
-				strokeColor: 'black', // 선의 색깔입니다
+				strokeColor: color, // 선의 색깔입니다
 
 				strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 
 				strokeStyle: 'solid', // 선의 스타일입니다
 			});
 
-			linePath.setMap(this.map);
+			this.linePath.setMap(this.map);
 		},
 	},
 };

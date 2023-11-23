@@ -158,22 +158,21 @@ export default {
 					var address = ref({});
 					address.value.addr1 = data.address_name;
 					address.value.addr2 = data.road_address_name;
-					address.value.longtitude = [data.x, data.y];
+					address.value.latitude = data.x;
+					address.value.longitude = data.y;
 
 					wish.value.address = address;
 					wish.value.placeName = data.place_name;
 					wish.value.category = data.category_group_name;
 					wish.value.memberIndex = store.state.account.memberIndex;
 
-					wishAPI.addWish(
-						wish.value,
-						({data})=>{
-							alert("성공적으로 위시리스트에 담았습니다.");
-							console.log(data.message);
-						}),
-						() =>{
-							console.log("위시리스트 담기 실패");
-						}
+					wishAPI.addWish(wish.value, ({ data }) => {
+						alert('성공적으로 위시리스트에 담았습니다.');
+						console.log(data.message);
+					}),
+						() => {
+							console.log('위시리스트 담기 실패');
+						};
 				});
 
 				content.appendChild(placeName);
@@ -236,7 +235,6 @@ export default {
 		},
 	},
 };
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
