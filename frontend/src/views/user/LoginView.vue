@@ -1,6 +1,6 @@
 <template>
 	<div class="container pt-5 mx-auto max-w-xs" style="width: 400px">
-		<h1 class="logo-font text-center py-8 dark:text-gray-300">| LOGIN |</h1>
+		<h2 class="logo-font text-center py-8 dark:text-gray-300">| LOGIN |</h2>
 		<form @submit.prevent="login()" class="group">
 			<div class="mb-4 relative">
 				<input
@@ -108,5 +108,8 @@ const login = () => {
 }
 #components-form-demo-normal-login .login-form-button {
 	width: 100%;
+}
+h2 {
+	font-size: 20px;
 }
 </style>

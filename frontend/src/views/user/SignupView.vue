@@ -3,7 +3,7 @@
 		class="container pt-5 mx-auto max-w-xs"
 		style="width: 400px; height: 1000px"
 	>
-		<h3 class="logo-font text-center py-8 dark:text-gray-300">| SIGN UP |</h3>
+		<h2 class="logo-font text-center py-8 dark:text-gray-300">| SIGN UP |</h2>
 		<form @submit.prevent="registerMem()" class="group">
 			<div class="mb-4 relative">
 				<input
@@ -164,4 +164,8 @@ const registerMem = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h2 {
+	font-size: 20px;
+}
+</style>

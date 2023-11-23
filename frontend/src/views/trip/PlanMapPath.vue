@@ -1,20 +1,21 @@
 <template>
-	<div class="grid grid-cols-4 gap-4 back items-center">
-		<div class="col-span-3">
-			<h3>{{ $route.params.index }}일째 여행지</h3>
-			<draggable
-				class="list-group"
-				:list="dayList"
-				group="people"
-				@change="log"
-				itemKey="name"
-			>
-				<template #item="{ element }">
-					<div class="list-group-item">{{ element.placeName }}</div>
-				</template>
-			</draggable>
-		</div>
-		<div class="col-span-1">
+	<div class="flex flex-col back items-center">
+		<div class="flex col-span-7" style="position: static; margin-top: 2rem">
+			<div class="col-span-1">
+				<h3>{{ $route.params.index }}일째 여행지</h3>
+				<draggable
+					class="list-group"
+					:list="dayList"
+					group="people"
+					@change="log"
+					itemKey="name"
+				>
+					<template #item="{ element }">
+						<div class="list-group-item">{{ element.placeName }}</div>
+					</template>
+				</draggable>
+			</div>
+			<!-- <div class="col-span-1">
 			<h3>즐겨찾기한 여행지</h3>
 			<draggable
 				class="list-group"
@@ -29,21 +30,22 @@
 					</div>
 				</template>
 			</draggable>
+		</div> -->
+			<div class="col-span-3">
+				<div id="map"></div>
+			</div>
+			<button @click="startFunc">최적 경로 찾기</button>
 		</div>
-
-		<router-link to="/plan/wholeplan">
-			<button
-				type="submit"
-				class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
-			>
-				이전
-			</button>
-		</router-link>
-		<button @click="startFunc">최적 경로 찾기</button>
 	</div>
-	<div>
-		<div id="map"></div>
-	</div>
+	<router-link to="/plan/wholeplan">
+		<button
+			type="submit"
+			class="mt-1 border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
+			style="width: 100px"
+		>
+			이전
+		</button>
+	</router-link>
 </template>
 
 <script>
@@ -321,5 +323,11 @@ export default {
 
 button {
 	margin: 0 3px;
+}
+
+h3 {
+	font-weight: 600;
+	margin-bottom: 5px;
+	margin-left: 5px;
 }
 </style>
