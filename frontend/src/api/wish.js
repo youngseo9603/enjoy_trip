@@ -19,4 +19,12 @@ const getWishList = (memberIndex, success, fail) => {
 	wishAPI.get(`/wish?memberIndex=${memberIndex}`).then(success).catch(fail);
 };
 
-export default { addWish, getWishList };
+const removeWish = (info, success, fail) => {
+	console.log(info);
+	wishAPI
+		.delete(`/wish?memberIndex=${info.memberIndex}&wishIndex=${info.wishIndex}`)
+		.then(success)
+		.then(fail);
+};
+
+export default { addWish, getWishList, removeWish };

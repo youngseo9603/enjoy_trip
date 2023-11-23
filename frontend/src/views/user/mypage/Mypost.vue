@@ -48,6 +48,7 @@ const startFunc = () => {
 		store.state.account.memberIndex,
 		({ data }) => {
 			boards.value = data.data;
+			console.log(boards.value);
 		},
 		() => {
 			console.log('게시판 찾기 실패');
