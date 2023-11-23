@@ -36,7 +36,7 @@
 				type="submit"
 				class="mt-1 w-full border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"
 			>
-				다음
+				이전
 			</button>
 		</router-link>
 		<button @click="startFunc">최적 경로 찾기</button>
