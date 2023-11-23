@@ -18,7 +18,7 @@
 
 ## 백엔드
 
-# 사용된 도구
+### 사용된 도구
 * Springboot
 * MySQL
 * JPA
