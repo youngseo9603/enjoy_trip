@@ -1,34 +1,27 @@
 <template>
 	<div class="grid grid-cols-4 gap-4 back items-center">
-		<div
-			class="col-span-3"
-			style="white-space: nowrap; overflow-x: auto; overflow-y: hidden"
-		>
-			<template v-for="(day, index) in days" :key="day.place_name">
-				<div
-					style="
-						width: 200px;
-						height: 200px;
-						display: inline-block;
-						margin-right: 10px;
-					"
+		<div class="col-span-3">
+			<div
+				style="
+					width: 200px;
+					height: 200px;
+					display: inline-block;
+					margin-right: 10px;
+				"
+			>
+				<h3>{{ index + 1 }}일째 여행지</h3>
+				<draggable
+					class="list-group"
+					:list="getList(index)"
+					group="people"
+					@change="log"
+					itemKey="name"
 				>
-					<router-link :to="{ path: '/plan/' + (index + 1) }">
-						<h3>{{ index + 1 }}일째 여행지</h3>
-						<draggable
-							class="list-group"
-							:list="getList(index)"
-							group="people"
-							@change="log"
-							itemKey="name"
-						>
-							<template #item="{ element }">
-								<div class="list-group-item">{{ element.place_name }}</div>
-							</template>
-						</draggable>
-					</router-link>
-				</div>
-			</template>
+					<template #item="{ element }">
+						<div class="list-group-item">{{ element.place_name }}</div>
+					</template>
+				</draggable>
+			</div>
 		</div>
 		<div class="col-span-1">
 			<h3>즐겨찾기한 여행지</h3>
