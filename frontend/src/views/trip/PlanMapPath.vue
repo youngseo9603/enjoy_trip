@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<div class="flex justify-center">
-		<router-link to="/plan/wholeplan">
+		<router-link to="/plan/wholeplan2">
 			<button
 				type="submit"
 				class="mt-1 border border-gray-300 py-3 rounded-lg bg-indigo-950 hover:bg-indigo-950 text-white font-bold group-invalid:pointer-events-none group-invalid:opacity-30"

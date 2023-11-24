@@ -12,11 +12,13 @@ import PlanView from '@/views/Plan.vue';
 import PlanDateView from '@/views/trip/PlanDate.vue';
 import PlanLocationView from '@/views/trip/PlanLocation.vue';
 import PlanTripView from '@/views/trip/PlanTrip.vue';
+import PlanTripView2 from '@/views/trip/PlanTrip2.vue';
 import PlanMapPathView from '@/views/trip/PlanMapPath.vue';
 import InfoView from '@/views/user/mypage/Info.vue';
 import MycommentView from '@/views/user/mypage/MyComment.vue';
 import MypostView from '@/views/user/mypage/MyPost.vue';
 import MytripView from '@/views/user/mypage/MyTrip.vue';
+import MyplanTripView2 from '@/views/user/mypage/Mytripplan2.vue';
 
 // import PlanMapSearchView from '@/views/trip/PlanMapSearch.vue';
 const router = createRouter({
@@ -57,6 +59,11 @@ const router = createRouter({
 					name: 'mytrip',
 					component: MytripView,
 				},
+				{
+					path: 'plan2',
+					name: 'plan2',
+					component: MyplanTripView2,
+				},
 			],
 		},
 		{
@@ -95,6 +102,11 @@ const router = createRouter({
 					path: 'wholeplan',
 					name: 'wholeplan',
 					component: PlanTripView,
+				},
+				{
+					path: 'wholeplan2',
+					name: 'wholeplan2',
+					component: PlanTripView2,
 				},
 				{
 					path: '',
