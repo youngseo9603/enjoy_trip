@@ -4,7 +4,7 @@
 		<br />
 		<p>내용: {{ board.boardContent }}</p>
 		<p>작성자 : {{ memberNickName }}</p>
-		<p class="text-muted">{{ board.createTime }}</p>
+		<p class="text-muted">{{ board.createTime.substr(0, 10) }}</p>
 		<hr />
 		<div class="row">
 			<div class="col-auto">
