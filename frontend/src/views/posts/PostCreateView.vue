@@ -1,7 +1,7 @@
 <template>
-	<div style="width:70%">
+	<div style="width: 70%">
 		<h2>게시글 등록</h2>
-		<br>
+		<br />
 		<hr />
 		<form @submit.prevent="registerBoard()">
 			<div class="my-3">
@@ -19,17 +19,26 @@
 					class="form-control"
 					id="content"
 					rows="3"
-					style="height:300px"
+					style="height: 300px"
 					v-model.lazy="board.boardContent"
 				/>
 			</div>
 			<div class="flex justify-end">
-				<button class="btn btn-outline-dark me-2 border border-gray-300" @click="goListPage">
-						목록
-					</button>
+				<button
+					class="btn btn-outline-dark me-2 border border-gray-300"
+					@click="goListPage"
+				>
+					목록
+				</button>
 			</div>
 			<div class="flex justify-center">
-				<button type="submit" class="btn btn-outline-dark" style="font-size:15px">등록하기</button>
+				<button
+					type="submit"
+					class="btn btn-outline-dark"
+					style="font-size: 15px"
+				>
+					등록하기
+				</button>
 			</div>
 		</form>
 	</div>
