@@ -1,4 +1,4 @@
-# Food Trip
+# Enjoy Trip
 
 ## Project
 * 2023년 SSAFY 관통 프로젝트 아기돼지삼남매 팀
