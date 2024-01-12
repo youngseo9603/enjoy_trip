@@ -5,7 +5,7 @@
 * 여행지 정보 조회 및 여행 계획 웹
 * API - https://github.com/youngseo9603/food_trip/wiki
 
-## 참여 인원
+## 참여 인원 
 |이름|역할|
 |------|---|
 |박태양|웹 퍼브리셔|
